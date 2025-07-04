@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jordan Medicinal Plants Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+  <header>
+    <img src="images/Figure1.png" alt="Banner Image" class="banner">
+    <h1>Jordanian Medicinal Plants</h1>
+    <p class="tagline">Dataset, Chemical Analysis, and Therapeutic Potential</p>
+  </header>
+
+  <section>
+    <h2 class="section-title">Ethnobotanical Diversity of Jordan Medicinal Plants</h2>
+    <div class="image-gallery">
+      <div><img src="images/figure1.png" alt="Figure 1"><p>Traditional Oil Extraction</p></div>
+      <div><img src="images/figure2.png" alt="Figure 2"><p>Herbal Remedies & Teas</p></div>
+      <div><img src="images/figure3.png" alt="Figure 3"><p>Wild Medicinal Herbs</p></div>
+      <div><img src="images/figure4.png" alt="Figure 4"><p>Phytochemical-Rich Plants</p></div>
+      <div><img src="images/figure5.png" alt="Figure 5"><p>Cultivated Garden Species</p></div>
+      <div><img src="images/figure6.png" alt="Figure 6"><p>Flowering Medicinals</p></div>
+      <div><img src="images/figure7.png" alt="Figure 7"><p>Desert Plants of Jordan</p></div>
+      <div><img src="images/figure8.png" alt="Figure 8"><p>Seasonal Herb Collection</p></div>
+      <div><img src="images/figure9.png" alt="Figure 9"><p>Seed-Based Therapies</p></div>
+    </div>
+  </section>
+
+  <section>
+  <h2 class="section-title">Project Summary</h2>
+  <p>
+    Jordan possesses a rich heritage of traditional medicine, with over 2,500 plant species — many of which have been historically used for treating various ailments. This website showcases the outcomes of a large-scale cheminformatic analysis of 7,866 secondary metabolites derived from 475 medicinal plants native to Jordan. By integrating computational tools, this project explores the physicochemical properties, scaffold diversity, and biological activity predictions of these compounds to reveal their potential for drug discovery.
+  </p>
+</section>
+
+<section>
+  <h2 class="section-title">About the Study</h2>
+  <p>
+    The curated phytochemical dataset was assembled through extensive literature mining and then compared to global natural product collections such as COCONUT and LANaPDB, as well as to FDA-approved drugs. Using RDKit, we calculated descriptors like molecular weight, logP, TPSA, and hydrogen bonding capacity to evaluate drug-likeness. Structural diversity was assessed via Bemis–Murcko scaffolds and scaffold clustering. Additionally, ligand-based target prediction methods were employed using ChEMBL Actives to map phytochemicals to potential therapeutic targets. Pathway enrichment and network pharmacology analysis were performed using Cytoscape and Enrichr.
+  </p>
+  <p>
+    The results demonstrate that Jordanian medicinal plants occupy a unique and diverse chemical space. Key findings include moderate scaffold diversity (F₅₀ = 0.04), biologically relevant physicochemical profiles, and multiple phytochemicals with polypharmacological potential across neurological, inflammatory, and metabolic pathways. The insights support the role of Jordan’s flora as a valuable and underexplored source for natural product-based drug discovery.
+  </p>
+</section>
+
+<section>
+  <h2 class="section-title">Methods Used</h2>
+  <p>
+    The cheminformatic workflow was designed to systematically evaluate and visualize the structural and biological properties of secondary metabolites from Jordanian medicinal plants. Key computational methods included:
+  </p>
+  <ul>
+    <li><strong>RDKit:</strong> Used for molecular preprocessing, descriptor calculation (e.g., MW, LogP, TPSA), salt stripping, and standardization.</li>
+    <li><strong>Bemis–Murcko Scaffold Extraction:</strong> Used to assess chemical framework diversity and generate cumulative scaffold recovery (CSR) curves.</li>
+    <li><strong>Dimensionality Reduction:</strong> PCA, t-SNE, and UMAP were applied to binary fingerprints (ECFP4) to visualize chemical space coverage and cluster distribution.</li>
+    <li><strong>Ligand-Based Target Prediction:</strong> Molecular fingerprints were compared to ChEMBL Actives to infer potential protein targets via Tanimoto similarity.</li>
+    <li><strong>Pathway Enrichment:</strong> Enrichr and KEGG were used to enrich gene targets and annotate biological pathways.</li>
+    <li><strong>Network Pharmacology:</strong> Cytoscape was used to visualize compound–target–pathway interactions and uncover systems-level mechanisms.</li>
+  </ul>
+</section>
+<section>
+  <h2 class="section-title">Key Statistics</h2>
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-around; padding: 1em;">
+    <div style="flex: 1 1 300px; margin: 1em;">
+      <h3>Dataset Summary</h3>
+      <ul>
+        <li><strong>Plants analyzed:</strong> 475 species</li>
+        <li><strong>Phytochemicals identified:</strong> 7,866 (7,459 unique)</li>
+        <li><strong>Overlaps:</strong> 822 with LANaPDB, 4,086 with COCONUT, 111 with FDA</li>
+      </ul>
+    </div>
+
+    <div style="flex: 1 1 300px; margin: 1em;">
+      <h3>Physicochemical Profile</h3>
+      <ul>
+        <li><strong>Average MW:</strong> 325.4 Da</li>
+        <li><strong>Average SlogP:</strong> 2.18</li>
+        <li><strong>Average TPSA:</strong> 74.2 Å²</li>
+        <li><strong>H-bond donors/acceptors:</strong> 2.1 / 4.7</li>
+      </ul>
+    </div>
+
+    <div style="flex: 1 1 300px; margin: 1em;">
+      <h3>Scaffold & Complexity</h3>
+      <ul>
+        <li><strong>Total unique scaffolds:</strong> 2,660</li>
+        <li><strong>F₅₀ scaffold diversity:</strong> 0.04 (moderate diversity)</li>
+        <li><strong>Average nSPS complexity:</strong> 0.446</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <h2 class="section-title">Figures and Results</h2>
+
+  <div class="figure-block">
+    <h3>Physicochemical Properties</h3>
+    <img class="report-figure" src="images/physicochemical_properties.png" alt="Physicochemical Properties">
+  </div>
+<p>
+  Jordan’s flora offers a rich diversity of phytochemicals with notable pharmacological potential. Particularly in the Mediterranean regions of Jordan, plant genera such as <em>Chrysanthemum</em>, <em>Onopordum</em>, <em>Phagnalon</em>, <em>Senecio</em>, <em>Clematis</em>, <em>Ranunculus</em>, <em>Anchusa</em>, and <em>Eryngium</em> are well known for their medicinal relevance. These genera produce diverse secondary metabolites that exhibit antioxidant, antibacterial, cytotoxic, anti-inflammatory, antidiabetic, anti-ulcer, and neuroprotective activities.
+</p>
+
+<p>
+  The Jordanian medicinal plant dataset was assembled via an extensive literature review across Google Scholar, Scopus, and PubMed, incorporating both historical and recent references. Only species with reported and chemically characterized phytochemicals were included. In total, 475 plant species were cataloged, yielding 7,866 phytochemicals. After standardization and deduplication, 7,459 unique secondary metabolites remained, forming the basis of the curated database.
+</p>
+
+<p>
+  Compared to global references, Jordanian compounds showed overlap with 822 entries from LANaPDB, 4,086 from COCONUT, and 111 from FDA-approved drugs. These intersections underscore the presence of both established and potentially novel bioactive compounds within Jordan’s flora.
+</p>
+
+<p>
+  The physicochemical profile of Jordanian phytochemicals shows an average molecular weight of <strong>325.4 Da</strong>, comparable to FDA drugs (331.5 Da) but lower than COCONUT (378.2 Da) and LANaPDB (359.7 Da). The mean <strong>logP</strong> value is <strong>2.18</strong>, indicating optimal lipophilicity for oral bioavailability. The <strong>TPSA</strong> averages <strong>74.2 Å²</strong>, within the favorable range for cell permeability. Average hydrogen bond donors and acceptors are <strong>2.1</strong> and <strong>4.7</strong>, respectively—values that align well with drug-likeness criteria. Rotatable bonds average <strong>5.0</strong>, suggesting balanced molecular flexibility conducive to bioactivity.
+</p>
+
+  <div class="figure-block">
+    <h3>Scaffold Diversity</h3>
+    <img class="report-figure" src="images/scaffold_csr_plot.png" alt="Scaffold Diversity">
+  </div>
+<p>
+  Scaffold diversity was evaluated using Bemis–Murcko frameworks, comparing Jordanian phytochemicals with reference datasets: COCONUT, LANaPDB, and FDA-approved drugs. The cumulative scaffold recovery (CSR) curve shows that only <strong>4% of scaffolds account for 50% of compounds</strong> in the Jordanian dataset (F₅₀ = 0.04), reflecting moderately high structural diversity—more diverse than FDA drugs (F₅₀ = 0.13) and approaching LANaPDB (F₅₀ = 0.10).
+</p>
+
+<p>
+  Despite its smaller size, the Jordanian dataset contains <strong>2,660 unique scaffolds</strong> across 7,866 compounds, indicating a substantial scaffold repertoire. In comparison, COCONUT includes over 200,000 scaffolds, while FDA-approved drugs contain only 1,301, due to their focused chemical optimization.
+</p>
+
+<p>
+  The area under the CSR curve (AUC) confirms these findings: the Jordanian dataset shows a balanced diversity (AUC = 0.803), intermediate between the FDA dataset (0.748, higher diversity) and COCONUT (0.822, lower diversity). This structural variation is supported by complexity scores (~0.446), comparable to LANaPDB.
+</p>
+
+<p>
+  The most common scaffolds in Jordanian phytochemicals include <strong>benzene (7.57%)</strong>, <strong>flavone backbones (1.84%)</strong>, <strong>cyclohexane (1.67%)</strong>, and <strong>tetrahydropyran (1.52%)</strong>. These frameworks are typical of bioactive classes such as flavonoids and terpenoids.
+</p>
+
+<p>
+  Compared to COCONUT and LANaPDB, the Jordanian scaffold profile shares some overlaps (e.g., benzene and ethers), but differs in relative abundance and complexity. FDA drugs, on the other hand, feature optimized scaffolds like <strong>biphenyl</strong> and <strong>pyridine</strong>, reflecting pharmaceutical design priorities.
+</p>
+<div class="figure-block">
+  <h3>Molecular Complexity (nSPS)</h3>
+  <img class="report-figure" src="images/nSPS_KDE.png" alt="Molecular Complexity Distribution">
+</div>
+
+<p>
+  Molecular complexity was assessed using the <strong>normalized spacial score (nSPS)</strong>, which integrates structural features such as ring systems, stereocenters, rotatable bonds, and sp³ carbon content, normalized by heavy atom count. This score reflects the three-dimensional character of molecules—an important factor in drug-likeness and bioactivity.
+</p>
+
+<p>
+  Jordanian phytochemicals displayed a <strong>mean nSPS of 0.446</strong>, comparable to LANaPDB (0.432) and slightly lower than COCONUT (0.470), indicating a diverse yet moderately complex structural profile. In contrast, <strong>FDA-approved drugs had a lower mean nSPS of 0.377</strong>, consistent with their design constraints for manufacturability and pharmacokinetics.
+</p>
+
+<p>
+  The Jordanian dataset shows a wide distribution of complexity values, suggesting the presence of varied stereochemical and conformational features. This diversity supports the dataset’s utility for exploring novel bioactive scaffolds with favorable pharmacokinetic traits.
+</p>
+
+<p>
+  Notably, higher molecular complexity has been linked to improved <strong>target selectivity, reduced off-target effects, and enhanced ADME properties</strong>. Therefore, incorporating nSPS in phytochemical evaluation enhances prioritization of compounds with promising therapeutic potential.
+</p>
+<div class="figure-block">
+  <h3>Dimensionality Reduction and Visualization</h3>
+  <img class="report-figure" src="images/dimentionality_reduction.png" alt="PCA, t-SNE, and UMAP visualizations">
+</div>
+
+  <p>
+    To explore the global chemical space of Jordanian phytochemicals alongside other natural product datasets and FDA-approved drugs, we applied three complementary dimensionality reduction techniques: PCA, t-SNE, and UMAP.
+  </p>
+
+  <p>
+    <strong>Principal Component Analysis (PCA)</strong> (Figure 5A) offered a rapid overview of dataset separability based on extended molecular fingerprints. Although PC1 and PC2 captured only 3% of the variance, PCA effectively distinguished between tightly clustered FDA drugs and more dispersed Jordanian phytochemicals. This suggests a broader chemical diversity in the Jordanian set, with partial overlap across LANaPDB and COCONUT.
+  </p>
+
+  <p>
+    <strong>t-distributed Stochastic Neighbor Embedding (t-SNE)</strong> (Figure 5B) preserved local molecular similarities and revealed multiple distinct clusters for Jordanian compounds, suggesting varied substructural motifs. In contrast, FDA drugs formed a tight cluster, while COCONUT and LANaPDB showed moderate spread with overlapping chemical features.
+  </p>
+
+  <p>
+    <strong>Uniform Manifold Approximation and Projection (UMAP)</strong> (Figure 5C) provided a balanced view of both global and local structural relationships. Jordanian phytochemicals showed broad, well-separated clusters, indicating high structural diversity. The COCONUT and LANaPDB datasets showed distinct but overlapping patterns, while FDA compounds again formed a dense, centralized group.
+  </p>
+
+  <p>
+    Together, these three visualizations highlight the chemical richness of Jordanian secondary metabolites. While PCA captures global variance trends, t-SNE unveils fine-grained molecular clustering, and UMAP effectively balances both perspectives. This integrative approach enhances the identification of novel scaffolds and informs natural product-based drug discovery.
+  </p>
+</section>
+
+<div class="figure-block">
+  <h3>Compound–Target Heatmap</h3>
+  <img class="report-figure" src="images/heatmap_compounds_targets.png" alt="Compound–Target Heatmap">
+  <p>
+    In our heatmap analysis of Jordanian phytochemicals, <strong>isoeugenol</strong> exhibited notable correlations with 
+    <strong>Amyloid Precursor Protein (APP)</strong> and <strong>Prostaglandin E Synthase (PTGES)</strong>, two proteins 
+    critically implicated in neurodegenerative and inflammatory pathways. APP is involved in Alzheimer's disease 
+    through its role in amyloid-beta peptide production and plaque formation. While direct interaction with isoeugenol 
+    has not been experimentally validated, the compound’s antioxidant and neuroprotective properties suggest possible 
+    indirect effects on APP-related mechanisms.
+  </p>
+  <p>
+    PTGES is an enzyme in the biosynthesis of prostaglandin E2, a key mediator of neuroinflammation. Isoeugenol has 
+    been shown to inhibit upstream cyclooxygenase enzymes, thereby reducing prostaglandin synthesis. This observation 
+    supports the potential role of isoeugenol in modulating inflammatory responses, although its direct impact on PTGES 
+    requires further investigation.
+  </p>
+</div>
+
+  <div class="figure-block">
+    <h3>Network Pharmacology</h3>
+    <img class="report-figure" src="images/compound-gene-pathway.png" alt="Compound-Gene-Pathway Network">
+    <p>
+      The network pharmacology analysis of Jordanian secondary metabolites reveals a complex web of interactions among compounds, predicted protein targets, and biological pathways. The network comprises over 2,300 nodes and 6,300 edges, offering valuable insights into potential therapeutic mechanisms.
+    </p>
+    <p>
+      Key compounds such as <strong>castanospermine</strong> were highlighted for their inhibitory activity on glycoprotein-processing enzymes, suggesting applications in antiviral and anticancer therapies. <strong>Beta-carboline alkaloids</strong> like harmol and pegaharmine J showed strong potential to modulate neurodevelopmental kinases (DYRK family and HASPIN), positioning them as promising candidates for neuropharmacological research.
+    </p>
+    <p>
+      The analysis also uncovered the dual modulatory role of <strong>agmatine</strong> in both mammalian neurotransmission and microbial metabolism. Immune receptor interactions, such as those involving <strong>KLRB1A (CD161)</strong>, hint at unexplored immunomodulatory roles for microbial metabolites.
+    </p>
+    <p>
+      Moreover, <strong>polyphenolic compounds</strong> were predicted to inhibit serine proteases like SUB1, suggesting roles beyond traditional antioxidant activity. <strong>Ecdysteroids</strong> were found to activate hormone receptors, potentially influencing both insect and mammalian physiology. These insights underscore the multi-target nature of natural compounds and their broad therapeutic relevance.
+    </p>
+    <p>
+      Overall, the integration of cheminformatics and network pharmacology reveals the vast bioactivity potential of Jordanian natural products and their relevance across oncology, neurology, infectious diseases, and metabolic disorders.
+    </p>
+  </div>
+</section>
+
+  <section>
+    <h2 class="section-title">Download Dataset</h2>
+    <p><a class="download-link" href="data/jordan_medicinal_plants_dataset.xlsx" download>📊 Download Excel Dataset</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Said Moshawih, Saba Alhazaymeh | Al-Ahliyya Amman University. 
+                   Long Chiau Ming | Sunway University</p>
+  </footer>
+  </div>
+</body>
+</html>
