@@ -1,8 +1,15 @@
-/* Plant catalog: render, search, filter, and lazily pull each species'
-   lead image + article link from Wikipedia. Uses the MediaWiki Action API
-   (prop=pageimages|info, origin=* for anonymous CORS) which reliably returns
-   a page's lead photo at a fixed size. Runs entirely in the visitor's browser;
-   no key, no backend. */
+/* Plant catalog: render, search, filter, and show each species' photo + a
+   Wikipedia link.
+
+   Image priority:
+     1. a LOCAL image bundled in the repo (assets/img/plants/<slug>.jpg),
+        declared per-plant via the "img" field in data.js  -> 100% reliable,
+        no external dependency at runtime;
+     2. if no local file is present, the lead photo from Wikipedia;
+     3. otherwise the leaf placeholder.
+
+   The Wikipedia article link is still fetched (REST summary API) so every
+   card links out to its encyclopedia entry. */
 
 (function () {
   var LEAF_PH =
@@ -16,58 +23,59 @@
     return species.replace(/ /g, "_");
   }
 
+  // load `src` into the card's thumb; call onFail() if it can't load
+  function setImage(cardEl, src, onFail) {
+    var thumb = cardEl.querySelector(".thumb");
+    if (!thumb || !src) { if (onFail) onFail(); return; }
+    var img = new Image();
+    img.alt = cardEl.getAttribute("data-species") || "";
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.referrerPolicy = "no-referrer";
+    img.className = "wikifade";
+    img.onload = function () {
+      thumb.innerHTML = "";
+      thumb.appendChild(img);
+      requestAnimationFrame(function () { img.classList.add("in"); });
+    };
+    img.onerror = function () { if (onFail) onFail(); };
+    img.src = src;
+  }
+
   var cache = {};
   function fetchWiki(title) {
     if (cache[title]) return cache[title];
-    var url =
-      "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*" +
-      "&redirects=1&prop=pageimages%7Cinfo&inprop=url&piprop=thumbnail&pithumbsize=500" +
-      "&titles=" + encodeURIComponent(title);
-    cache[title] = fetch(url)
+    var url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title);
+    cache[title] = fetch(url, { headers: { Accept: "application/json" } })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) {
-        if (!j || !j.query || !j.query.pages) return null;
-        var pages = j.query.pages;
-        var keys = Object.keys(pages);
-        if (!keys.length) return null;
-        var pg = pages[keys[0]];           // first (and only) page
-        if (pg.missing !== undefined) return null;  // no such article
-        return {
-          img: pg.thumbnail ? pg.thumbnail.source : null,
-          page: pg.fullurl ||
-                ("https://en.wikipedia.org/wiki/" + encodeURIComponent(title))
-        };
-      })
       .catch(function () { return null; });
     return cache[title];
   }
 
   function hydrate(cardEl) {
     var title = cardEl.getAttribute("data-wiki");
-    var thumb = cardEl.querySelector(".thumb");
+    var localImg = cardEl.getAttribute("data-img");
     var linkWrap = cardEl.querySelector(".links");
+    var imageDone = false;
+
+    // 1) try the bundled local image first
+    if (localImg) {
+      setImage(cardEl, localImg, function () { /* local missing -> wiki below */ tryWikiImage(); });
+    }
+
+    // 2) fetch Wikipedia for the link (always) and, if needed, the photo
+    function tryWikiImage() { imageDone = false; /* allow wiki image */ }
     fetchWiki(title).then(function (data) {
-      // image
-      if (data && data.img && thumb) {
-        var img = new Image();
-        img.alt = cardEl.getAttribute("data-species") || "";
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.referrerPolicy = "no-referrer";
-        img.className = "wikifade";
-        img.onload = function () {
-          thumb.innerHTML = "";
-          thumb.appendChild(img);
-          requestAnimationFrame(function () { img.classList.add("in"); });
-        };
-        img.onerror = function () { /* keep leaf placeholder */ };
-        img.src = data.img;
+      // image fallback only if there is no local image declared
+      if (!localImg && data && data.thumbnail && data.thumbnail.source) {
+        setImage(cardEl, data.thumbnail.source, null);
       }
       // link
       if (!linkWrap) return;
-      if (data && data.page) {
+      if (data && data.content_urls && data.content_urls.desktop) {
         linkWrap.innerHTML =
-          '<a href="' + data.page + '" target="_blank" rel="noopener">Wikipedia &#8599;</a>';
+          '<a href="' + data.content_urls.desktop.page +
+          '" target="_blank" rel="noopener">Wikipedia &#8599;</a>';
       } else {
         linkWrap.innerHTML =
           '<span class="muted" style="font-weight:600">No Wikipedia entry</span>';
@@ -89,6 +97,7 @@
     el.className = "plant reveal";
     el.setAttribute("data-wiki", title);
     el.setAttribute("data-species", p.s);
+    if (p.img) el.setAttribute("data-img", p.img);
     el.innerHTML =
       '<div class="thumb">' + LEAF_PH + "</div>" +
       '<div class="body">' +
