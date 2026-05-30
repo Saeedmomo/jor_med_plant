@@ -58,6 +58,7 @@
       '<div><h4>Resources</h4><div class="fnav">' +
       '<a href="https://saeedmomo.github.io/jor_med_plant/" target="_blank" rel="noopener">Live project site &#8599;</a>' +
       '<a href="https://github.com/Saeedmomo/jor_med_plant" target="_blank" rel="noopener">GitHub repository &#8599;</a>' +
+      '<a href="https://www.linkedin.com/in/said-moshawih-636a3097/" target="_blank" rel="noopener">LinkedIn profile &#8599;</a>' +
       '<a href="https://coconut.naturalproducts.net/" target="_blank" rel="noopener">COCONUT database &#8599;</a>' +
       '<a href="https://www.ebi.ac.uk/chembl/" target="_blank" rel="noopener">ChEMBL &#8599;</a>' +
       "</div></div>" +
