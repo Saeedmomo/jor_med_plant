@@ -110,28 +110,15 @@
   }
 
   var hydObserver;
-  function observeHydration() {
-    if (hydObserver) hydObserver.disconnect();
-    if (!("IntersectionObserver" in window)) {
-      document.querySelectorAll(".plant[data-wiki]").forEach(function (c) {
-        if (!c.__hyd) { c.__hyd = true; hydrate(c); c.classList.add("in"); }
-      });
-      return;
+function observeHydration() {
+  document.querySelectorAll(".plant[data-wiki]").forEach(function (c) {
+    if (!c.__hyd) {
+      c.__hyd = true;
+      hydrate(c);
+      c.classList.add("in");
     }
-    hydObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          hydrate(en.target);
-          en.target.classList.add("in");
-          hydObserver.unobserve(en.target);
-        }
-      });
-    }, { rootMargin: "300px" });
-    document.querySelectorAll(".plant[data-wiki]").forEach(function (c) {
-      if (!c.__hyd) { c.__hyd = true; hydObserver.observe(c); }
-    });
-  }
-
+  });
+}
   // ---------- Featured strip (home + plants page) ----------
   window.renderFeatured = function (hostId, limit) {
     var host = document.getElementById(hostId);
