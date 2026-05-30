@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methods &amp; AI &mdash; Jordan Medicinal Plants</title>
+<meta name="description" content="The cheminformatic and network-pharmacology workflow: descriptors, scaffolds, chemical space, target prediction, machine learning and drug repurposing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="section-tight" style="padding-top:54px">
+  <div class="wrap narrow">
+    <p class="eyebrow reveal">The scientific approach</p>
+    <h1 class="reveal">Methods &amp; AI.</h1>
+    <p class="lead reveal">A reproducible, in-silico pipeline turns a list of plant chemicals into testable biological hypotheses &mdash; characterizing chemical space, predicting protein targets, and prioritising candidates for the lab.</p>
+  </div>
+</section>
+
+<!-- APPROACH CHIPS -->
+<section class="section-tight" style="padding-top:0">
+  <div class="wrap">
+    <div class="approach">
+      <div class="a reveal"><div class="ic">&#9883;</div><h3>Cheminformatics</h3><p>RDKit descriptors, Bemis&ndash;Murcko scaffolds and nSPS complexity to profile structure and drug-likeness.</p></div>
+      <div class="a reveal"><div class="ic">&#128376;</div><h3>Network pharmacology</h3><p>Compound&ndash;target&ndash;pathway networks in Cytoscape to read systems-level mechanisms.</p></div>
+      <div class="a reveal"><div class="ic">&#129513;</div><h3>Molecular docking</h3><p>Structure-based scoring to test predicted ligand&ndash;target binding poses for prioritised pairs.</p></div>
+      <div class="a reveal"><div class="ic">&#128269;</div><h3>Virtual screening</h3><p>Fingerprint similarity against ChEMBL Actives to flag the most promising metabolites at scale.</p></div>
+      <div class="a reveal"><div class="ic">&#129504;</div><h3>Machine learning</h3><p>Similarity- and model-based inference linking phytochemicals to bioactivity classes.</p></div>
+      <div class="a reveal"><div class="ic">&#128260;</div><h3>Drug repurposing</h3><p>Mapping natural products onto validated targets to reveal new uses for known chemistry.</p></div>
+      <div class="a reveal"><div class="ic">&#127807;</div><h3>NP discovery</h3><p>Surfacing novel chemotypes and untapped species for experimental follow-up.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PIPELINE -->
+<section>
+  <div class="wrap narrow">
+    <span class="kicker-rule"></span>
+    <h2 style="margin-bottom:28px">The pipeline, step by step</h2>
+    <div class="steps">
+      <div class="step reveal"><div class="n">1</div><div><h3>Curate &amp; standardize</h3><p>Phytochemicals mined from Google&nbsp;Scholar, Scopus and PubMed are cleaned with RDKit &mdash; salt stripping, tautomer normalization and protonation correction &mdash; then deduplicated.</p></div></div>
+      <div class="step reveal"><div class="n">2</div><div><h3>Compute descriptors</h3><p>Molecular weight, SlogP, TPSA, H-bond donors/acceptors and rotatable bonds, benchmarked against COCONUT, LANaPDB and FDA drugs.</p></div></div>
+      <div class="step reveal"><div class="n">3</div><div><h3>Map chemical space</h3><p>Morgan / ECFP4 fingerprints reduced with PCA, t-SNE and UMAP to reveal clustering and novel chemotypes.</p></div></div>
+      <div class="step reveal"><div class="n">4</div><div><h3>Predict targets</h3><p>Tanimoto similarity to ChEMBL Actives (IC&#8325;&#8320; &lt; 1000&nbsp;nM, confidence &ge; 7) infers the most likely protein targets per compound.</p></div></div>
+      <div class="step reveal"><div class="n">5</div><div><h3>Enrich pathways &amp; build the network</h3><p>Target genes are enriched against KEGG via Enrichr, and a compound&ndash;target&ndash;pathway network is assembled in Cytoscape for interpretation.</p></div></div>
+    </div>
+    <p class="note" style="margin-top:24px">Tools: RDKit &middot; Cytoscape 3.10.3 &middot; Enrichr / KEGG 2021 &middot; ECFP4 fingerprints &middot; Tanimoto &ge; 0.6 &middot; ChEMBL (365,330 interactions, 3,363 targets).</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LIVE CHARTS -->
+<section>
+  <div class="wrap">
+    <span class="kicker-rule"></span>
+    <h2 style="margin-bottom:8px">Results at a glance</h2>
+    <p class="muted" style="margin-bottom:30px">Charts below are rendered live from the project dataset.</p>
+
+    <div class="grid g2">
+      <div class="figframe reveal">
+        <h3 style="margin:0 0 4px">Top predicted protein targets</h3>
+        <p class="muted" style="font-size:.86rem;margin:0 0 12px">Ranked by number of phytochemical ligands</p>
+        <canvas id="targetChart" height="320"></canvas>
+      </div>
+      <div class="figframe reveal">
+        <h3 style="margin:0 0 4px">Most frequent scaffolds</h3>
+        <p class="muted" style="font-size:.86rem;margin:0 0 12px">Share of compounds (Bemis&ndash;Murcko)</p>
+        <canvas id="scaffoldChart" height="320"></canvas>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:22px">
+      <div class="figframe reveal">
+        <h3 style="margin:0 0 4px">Molecular complexity (nSPS)</h3>
+        <p class="muted" style="font-size:.86rem;margin:0 0 12px">Mean normalized spacial score by dataset</p>
+        <canvas id="nspsChart" height="300"></canvas>
+      </div>
+      <div class="figframe reveal">
+        <h3 style="margin:0 0 14px">Physicochemical profile</h3>
+        <div style="overflow-x:auto"><table class="data" id="pchemTable"></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STATIC FIGURES -->
+<section>
+  <div class="wrap">
+    <span class="kicker-rule"></span>
+    <h2 style="margin-bottom:8px">Manuscript figures</h2>
+    <p class="muted" style="margin-bottom:26px">High-resolution figures from the study. To display them, drop the image files into <code>assets/img/</code> using the filenames shown below.</p>
+    <div class="grid g2">
+      <figure class="figframe reveal" style="margin:0">
+        <img src="assets/img/fig1_physicochemical.png" alt="Physicochemical properties across datasets" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add &lt;b&gt;assets/img/fig1_physicochemical.png&lt;/b&gt;&lt;/div&gt;'">
+        <figcaption class="figcap">Figure 1 &middot; Physicochemical properties of Jordanian, COCONUT, LANaPDB and FDA compounds.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <img src="assets/img/fig2_scaffold.png" alt="Scaffold diversity analysis" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add &lt;b&gt;assets/img/fig2_scaffold.png&lt;/b&gt;&lt;/div&gt;'">
+        <figcaption class="figcap">Figure 2 &middot; Scaffold diversity (CSR curves, scaffold counts, AUC, top scaffolds).</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <img src="assets/img/fig5_dimreduction.png" alt="PCA t-SNE UMAP chemical space" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add &lt;b&gt;assets/img/fig5_dimreduction.png&lt;/b&gt;&lt;/div&gt;'">
+        <figcaption class="figcap">Figure 5 &middot; Chemical space via PCA, t-SNE and UMAP.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <img src="assets/img/fig7_network.png" alt="Compound target pathway network" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add &lt;b&gt;assets/img/fig7_network.png&lt;/b&gt;&lt;/div&gt;'">
+        <figcaption class="figcap">Figure 7 &middot; Compound&ndash;target&ndash;pathway network (Cytoscape).</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script>
+(function(){
+  var GREEN="#2f6b4f", SAGE="#7c8b5a", CLAY="#b5562e", GOLD="#c9a24b", INK="#56503f";
+  Chart.defaults.font.family = "'Hanken Grotesk', sans-serif";
+  Chart.defaults.color = INK;
+
+  // Targets
+  var t = JMP.targets;
+  new Chart(document.getElementById("targetChart"), {
+    type:"bar",
+    data:{labels:t.map(function(x){return x[0]}),
+      datasets:[{label:"Ligands", data:t.map(function(x){return x[2]}), backgroundColor:GREEN, borderRadius:5}]},
+    options:{indexAxis:"y",plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:function(c){return c.raw+" ligands — "+t[c.dataIndex][1]}}}},
+      scales:{x:{grid:{color:"#ece4d0"}},y:{grid:{display:false}}}}
+  });
+
+  // Scaffolds
+  var sc = JMP.scaffolds;
+  new Chart(document.getElementById("scaffoldChart"), {
+    type:"bar",
+    data:{labels:sc.map(function(x){return x[0]}),
+      datasets:[{label:"% of compounds", data:sc.map(function(x){return x[1]}), backgroundColor:SAGE, borderRadius:5}]},
+    options:{indexAxis:"y",plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:function(c){return c.raw+"% of compounds"}}}},
+      scales:{x:{grid:{color:"#ece4d0"},ticks:{callback:function(v){return v+"%"}}},y:{grid:{display:false}}}}
+  });
+
+  // nSPS
+  new Chart(document.getElementById("nspsChart"), {
+    type:"bar",
+    data:{labels:["Jordan","COCONUT","LANaPDB","FDA"],
+      datasets:[{label:"Mean nSPS", data:[0.446,0.470,0.432,0.377],
+        backgroundColor:[GREEN,SAGE,GOLD,CLAY], borderRadius:6}]},
+    options:{plugins:{legend:{display:false}},
+      scales:{y:{beginAtZero:true,grid:{color:"#ece4d0"}},x:{grid:{display:false}}}}
+  });
+
+  // Pchem table
+  var tab=document.getElementById("pchemTable"), p=JMP.pchem;
+  var head="<thead><tr>"+p[0].map(function(h){return "<th>"+h+"</th>"}).join("")+"</tr></thead>";
+  var body="<tbody>"+p.slice(1).map(function(r){return "<tr>"+r.map(function(c,i){return "<td>"+c+"</td>"}).join("")+"</tr>"}).join("")+"</tbody>";
+  tab.innerHTML=head+body;
+})();
+</script>
+<script src="assets/js/components.js"></script>
+</body>
+</html>

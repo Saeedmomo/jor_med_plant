@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discoveries &amp; Repurposing &mdash; Jordan Medicinal Plants</title>
+<meta name="description" content="Featured Jordanian phytochemicals with predicted — and novel — therapeutic target associations, plus a network-pharmacology repurposing case study.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="section-tight" style="padding-top:54px">
+  <div class="wrap narrow">
+    <p class="eyebrow reveal">Findings</p>
+    <h1 class="reveal">Compound discoveries &amp; repurposing.</h1>
+    <p class="lead reveal">Ligand-based prediction across the Jordanian metabolite set surfaced compounds with rich &mdash; and sometimes entirely novel &mdash; therapeutic target associations. Each candidate below pairs an established source plant with a predicted mechanism and its experimental status.</p>
+  </div>
+</section>
+
+<!-- COMPOUND GRID -->
+<section class="section-tight" style="padding-top:0">
+  <div class="wrap">
+    <div class="grid g3" id="compoundGrid"></div>
+    <p class="note" style="margin-top:24px">&starf; <strong>Highest polypharmacology.</strong> Predictions are computational hypotheses for prioritisation, not clinical claims; experimental validation is required.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- REPURPOSING CASE STUDY -->
+<section>
+  <div class="wrap">
+    <span class="kicker-rule"></span>
+    <h2 style="margin-bottom:8px">Case study: repurposing a &beta;-carboline</h2>
+    <p class="lead narrow" style="margin-bottom:30px">How network pharmacology took <em>Harmol</em> &mdash; an alkaloid from the desert plant <em>Peganum harmala</em> &mdash; from a known sedative chemistry to a candidate kinase modulator.</p>
+    <div class="steps">
+      <div class="step reveal"><div class="n">A</div><div><h3>Start from the plant</h3><p><em>Peganum harmala</em> (Syrian rue / harmal) is widely used in Jordanian folk medicine and is rich in &beta;-carboline alkaloids, including harmol and harmine.</p></div></div>
+      <div class="step reveal"><div class="n">B</div><div><h3>Fingerprint &amp; compare</h3><p>ECFP4 fingerprints of harmol were compared against ChEMBL Actives. The strongest matches pointed to the kinase <strong>DYRK1A</strong> &mdash; a well-validated harmine target (IC&#8325;&#8320; &asymp; 33&nbsp;nM).</p></div></div>
+      <div class="step reveal"><div class="n">C</div><div><h3>Read the network</h3><p>In the compound&ndash;target&ndash;pathway network, harmol additionally connected to <strong>HASPIN</strong>, a mitotic histone kinase &mdash; an association <em>not</em> previously reported for &beta;-carbolines.</p></div></div>
+      <div class="step reveal"><div class="n">D</div><div><h3>Generate the hypothesis</h3><p>The HASPIN&ndash;&beta;-carboline link, surfaced computationally for the first time here, positions harmol as a candidate modulator of cell-cycle and neurodevelopmental kinases &mdash; a testable lead for oncology and neuropharmacology.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- NETWORK PHARMACOLOGY -->
+<section>
+  <div class="wrap">
+    <span class="kicker-rule"></span>
+    <h2 style="margin-bottom:8px">The compound&ndash;target&ndash;pathway network</h2>
+    <p class="narrow muted" style="margin-bottom:28px">Built in Cytoscape, the network integrates ligand-based predictions with KEGG pathway enrichment, revealing how single phytochemicals reach across many biological processes.</p>
+    <div class="statline reveal" id="netStats" style="margin-bottom:26px"></div>
+    <div class="grid g2">
+      <div class="reveal">
+        <p>The network exposes mechanisms spanning <strong>glycoprotein processing</strong> (castanospermine &rarr; mannosidases), <strong>kinase regulation</strong> (&beta;-carbolines &rarr; DYRK / HASPIN), <strong>immune modulation</strong> (microbial metabolites &rarr; KLRB1A / CD161) and <strong>protease inhibition</strong> (polyphenols &rarr; SUB1).</p>
+        <p class="mb0">Many compounds behave as multi-target hubs &mdash; the structural basis of natural products&rsquo; characteristic polypharmacology, and a rich seam for repurposing.</p>
+      </div>
+      <figure class="figframe reveal" style="margin:0">
+        <img src="assets/img/fig7_network.png" alt="Compound target pathway network" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add the network figure as &lt;b&gt;assets/img/fig7_network.png&lt;/b&gt;&lt;/div&gt;'">
+        <figcaption class="figcap">Compound&ndash;target&ndash;pathway network (Cytoscape 3.10.3).</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script>
+(function(){
+  var host=document.getElementById("compoundGrid");
+  JMP.compounds.forEach(function(c){
+    var props=Object.keys(c.props).map(function(k){return '<span class="prop">'+k+" "+c.props[k]+"</span>"}).join("");
+    var el=document.createElement("div");
+    el.className="compound reveal";
+    el.innerHTML=
+      '<div class="top" style="background:'+c.color+'">'+
+        '<div style="display:flex;justify-content:space-between;align-items:start;gap:8px">'+
+          '<h3>'+c.name+(c.star?' &starf;':'')+'</h3>'+
+          '<span style="font-size:.72rem;background:rgba(255,255,255,.2);padding:3px 9px;border-radius:999px;white-space:nowrap">'+c.area+'</span>'+
+        '</div>'+
+        '<div class="tgt">&#9655; '+c.targets+'</div>'+
+      '</div>'+
+      '<div class="meat">'+
+        '<div class="row muted" style="font-size:.82rem;font-family:var(--mono)">'+c.cls+'</div>'+
+        '<div class="row">'+c.desc+'</div>'+
+        '<div class="row"><b>Source:</b> '+c.source+'</div>'+
+        '<div class="row"><b>Mechanism:</b> '+c.mech+'</div>'+
+        '<div class="props">'+props+'</div>'+
+        '<div class="novel">&#10022; <b>Novel:</b> '+c.novel+'</div>'+
+        '<div class="row muted" style="font-size:.85rem"><b>Status:</b> '+c.valid+'</div>'+
+      '</div>'+
+      '<div class="foot"><span>'+c.formula+' &middot; MW '+c.mw+'</span>'+
+        '<a href="https://pubchem.ncbi.nlm.nih.gov/compound/'+c.pubchem+'" target="_blank" rel="noopener">PubChem '+c.pubchem+' &#8599;</a></div>';
+    host.appendChild(el);
+  });
+
+  var s=JMP.stats;
+  document.getElementById("netStats").innerHTML=[
+    [s.net_nodes.toLocaleString(),"Network nodes"],
+    [s.net_compounds.toLocaleString(),"Compounds"],
+    [s.net_targets.toLocaleString(),"Targets"],
+    [s.net_pathways.toLocaleString(),"Pathways"],
+    [s.net_edges.toLocaleString(),"Interactions"]
+  ].map(function(i){return '<div class="stat"><div class="num">'+i[0]+'</div><div class="lbl">'+i[1]+'</div></div>'}).join("");
+})();
+</script>
+<script src="assets/js/components.js"></script>
+</body>
+</html>

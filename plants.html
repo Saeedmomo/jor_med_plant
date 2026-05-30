@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plant Catalog &mdash; Jordan Medicinal Plants</title>
+<meta name="description" content="Browse and search Jordanian medicinal plant species with live botanical imagery, families, and Wikipedia links.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="section-tight" style="padding-top:54px">
+  <div class="wrap">
+    <p class="eyebrow reveal">Living catalog</p>
+    <h1 class="reveal" style="max-width:18ch">The Jordan medicinal plant catalog</h1>
+    <p class="lead reveal narrow">Every species below is drawn from the curated literature dataset. Botanical photographs and a short description load live from Wikipedia, and each card links to its full encyclopaedia entry &mdash; cards with no entry mark species that are documented in the local literature but lack a public profile.</p>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="section-tight" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker-rule"></span>
+    <h2 style="margin-bottom:24px">Signature species</h2>
+    <div class="feat-grid" id="featuredCatalog"></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FULL BROWSER -->
+<section>
+  <div class="wrap">
+    <span class="kicker-rule"></span>
+    <h2 style="margin-bottom:6px">Browse all documented species</h2>
+    <p class="muted">Search by name or family, or filter by botanical family.</p>
+
+    <div class="toolbar">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c8b5a" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="plantSearch" type="text" placeholder="Search species or family (e.g. Salvia, Lamiaceae)&hellip;" autocomplete="off">
+      </div>
+      <select class="select" id="famSelect"><option value="">All families</option></select>
+      <span class="count-note" id="catCount"></span>
+    </div>
+
+    <div class="plant-grid" id="plantGrid"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/plants.js"></script>
+<script>
+  renderFeatured("featuredCatalog");
+  initCatalog();
+</script>
+<script src="assets/js/components.js"></script>
+</body>
+</html>

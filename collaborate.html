@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contribute &mdash; Jordan Medicinal Plants</title>
+<meta name="description" content="Contribute phytochemical profiles, LC-MS/GC-MS data and species characterizations to the open Jordan Medicinal Plants database.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="section-tight" style="padding-top:54px">
+  <div class="wrap narrow">
+    <p class="eyebrow reveal">Collaboration portal</p>
+    <h1 class="reveal">Contribute to the open database.</h1>
+    <p class="lead reveal">This project is built to grow. If you study Jordanian flora, you can add data &mdash; and be credited &mdash; helping turn this resource into a living national phytochemical map.</p>
+  </div>
+</section>
+
+<!-- WHAT YOU CAN CONTRIBUTE -->
+<section class="section-tight" style="padding-top:0">
+  <div class="wrap">
+    <div class="grid g3">
+      <div class="card reveal"><span class="pill">Chemistry</span><h3 style="margin:12px 0 6px">Phytochemical profiles</h3><p class="muted mb0">Isolated compounds, structures (SMILES / InChI) and the species they were found in.</p></div>
+      <div class="card reveal"><span class="pill">Spectra</span><h3 style="margin:12px 0 6px">LC-MS &amp; GC-MS results</h3><p class="muted mb0">Metabolite-profiling data for species that have never been analysed.</p></div>
+      <div class="card reveal"><span class="pill">Taxonomy</span><h3 style="margin:12px 0 6px">Characterization studies</h3><p class="muted mb0">New species records, traditional-use documentation and bioactivity assays.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FORM -->
+<section>
+  <div class="wrap" style="display:grid;grid-template-columns:1fr 1.2fr;gap:46px;align-items:start">
+    <div class="reveal">
+      <span class="kicker-rule"></span>
+      <h2>Submit a contribution</h2>
+      <p>Fill in what you have &mdash; even a single species or compound helps. On submit, your entry is packaged into a pre-filled email (or a public GitHub issue) for review before it joins the open dataset.</p>
+      <p class="note">No account required. Nothing is published automatically; every submission is curated and attributed before inclusion.</p>
+      <h3 style="margin-top:24px">Other ways to contribute</h3>
+      <div class="fnav" style="display:flex;flex-direction:column;gap:8px">
+        <a href="https://github.com/Saeedmomo/jor_med_plant/issues/new" target="_blank" rel="noopener">&#128221; Open a GitHub issue &#8599;</a>
+        <a href="https://github.com/Saeedmomo/jor_med_plant/fork" target="_blank" rel="noopener">&#9282; Fork the repository &amp; submit a pull request &#8599;</a>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <form id="contribForm">
+        <div class="form-grid">
+          <label class="fld">Your name<input name="name" required placeholder="Dr. Jane Doe"></label>
+          <label class="fld">Email<input type="email" name="email" required placeholder="you@university.edu"></label>
+          <label class="fld full">Affiliation / institution<input name="affil" placeholder="Department, University"></label>
+          <label class="fld">Contribution type
+            <select name="type">
+              <option>Phytochemical profile</option>
+              <option>LC-MS results</option>
+              <option>GC-MS results</option>
+              <option>Species characterization</option>
+              <option>New species record</option>
+              <option>Bioactivity / assay data</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="fld">Plant species (binomial)<input name="species" placeholder="e.g. Astragalus callichrous"></label>
+          <label class="fld full">Compounds / SMILES (optional)<textarea name="compounds" placeholder="One per line: Compound name, SMILES"></textarea></label>
+          <label class="fld full">Notes, methods &amp; references<textarea name="notes" placeholder="Briefly describe the data, analytical method, and any DOI / citation."></textarea></label>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
+          <button type="submit" class="btn btn-primary">Package &amp; submit &rarr;</button>
+          <button type="button" id="issueBtn" class="btn btn-ghost">Submit as GitHub issue</button>
+        </div>
+        <p id="formMsg" class="muted" style="margin-top:14px;font-size:.9rem"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script>
+(function(){
+  // --- CONFIG ---------------------------------------------------------------
+  // Out of the box this opens a pre-filled email. To collect submissions
+  // automatically without a server, create a free form at https://formspree.io
+  // and paste your endpoint URL below (e.g. "https://formspree.io/f/abcdwxyz").
+  var FORMSPREE_ENDPOINT = "";          // <-- optional: paste your Formspree URL
+  var CONTACT_EMAIL = "saeed.momo@example.com";   // <-- change to your real email
+  var GH_REPO = "Saeedmomo/jor_med_plant";
+  // --------------------------------------------------------------------------
+
+  var form = document.getElementById("contribForm");
+  var msg = document.getElementById("formMsg");
+
+  function collect(){
+    var f = new FormData(form), o = {};
+    f.forEach(function(v,k){ o[k]=v; });
+    return o;
+  }
+  function asText(o){
+    return "New contribution to Jordan Medicinal Plants\n\n"+
+      "Name: "+o.name+"\nEmail: "+o.email+"\nAffiliation: "+(o.affil||"-")+
+      "\nType: "+o.type+"\nSpecies: "+(o.species||"-")+
+      "\n\nCompounds / SMILES:\n"+(o.compounds||"-")+
+      "\n\nNotes & references:\n"+(o.notes||"-");
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var o = collect();
+    if(FORMSPREE_ENDPOINT){
+      fetch(FORMSPREE_ENDPOINT,{method:"POST",headers:{Accept:"application/json"},body:new FormData(form)})
+        .then(function(r){ msg.textContent = r.ok ? "Thank you — your contribution was sent for review." : "Something went wrong; please try the email option."; if(r.ok) form.reset(); })
+        .catch(function(){ msg.textContent = "Network error; opening your email client instead."; openMail(o); });
+    } else {
+      openMail(o);
+      msg.textContent = "Your email client should now open with the submission pre-filled. (Tip: a maintainer can wire up Formspree for one-click submission.)";
+    }
+  });
+  function openMail(o){
+    var subj = encodeURIComponent("Data contribution: "+(o.species||o.type));
+    window.location.href = "mailto:"+CONTACT_EMAIL+"?subject="+subj+"&body="+encodeURIComponent(asText(o));
+  }
+  document.getElementById("issueBtn").addEventListener("click", function(){
+    var o = collect();
+    var url = "https://github.com/"+GH_REPO+"/issues/new?title="+
+      encodeURIComponent("Data contribution: "+(o.species||o.type))+
+      "&body="+encodeURIComponent(asText(o));
+    window.open(url,"_blank","noopener");
+  });
+})();
+</script>
+<script src="assets/js/components.js"></script>
+</body>
+</html>
