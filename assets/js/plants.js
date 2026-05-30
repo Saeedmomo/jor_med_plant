@@ -1,6 +1,8 @@
 /* Plant catalog: render, search, filter, and lazily pull each species'
-   lead image + one-line summary + article link from the public Wikipedia
-   REST API (CORS-enabled, no key needed). Runs in the visitor's browser. */
+   lead image + article link from Wikipedia. Uses the MediaWiki Action API
+   (prop=pageimages|info, origin=* for anonymous CORS) which reliably returns
+   a page's lead photo at a fixed size. Runs entirely in the visitor's browser;
+   no key, no backend. */
 
 (function () {
   var LEAF_PH =
@@ -9,30 +11,33 @@
     '<path d="M20 44C24 30 30 20 38 14" stroke="#c9a24b" stroke-width="2" stroke-linecap="round"/>' +
     "</svg></div>";
 
-  // species -> chosen Wikipedia title (defaults to species name with spaces->_)
   function wikiTitle(species, override) {
     if (override) return override;
     return species.replace(/ /g, "_");
   }
 
-  // Pick the best image URL from a REST summary payload and, when it is a
-  // standard MediaWiki thumbnail, bump the requested width so cards look sharp.
-  function pickImage(data) {
-    var src = null;
-    if (data && data.thumbnail && data.thumbnail.source) src = data.thumbnail.source;
-    else if (data && data.originalimage && data.originalimage.source) src = data.originalimage.source;
-    if (!src) return null;
-    // upscale the default ~240-320px thumb to 500px when the URL exposes a width
-    src = src.replace(/\/(\d+)px-/, "/500px-");
-    return src;
-  }
-
   var cache = {};
   function fetchWiki(title) {
     if (cache[title]) return cache[title];
-    var url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title);
-    cache[title] = fetch(url, { headers: { Accept: "application/json" } })
+    var url =
+      "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*" +
+      "&redirects=1&prop=pageimages%7Cinfo&inprop=url&piprop=thumbnail&pithumbsize=500" +
+      "&titles=" + encodeURIComponent(title);
+    cache[title] = fetch(url)
       .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.query || !j.query.pages) return null;
+        var pages = j.query.pages;
+        var keys = Object.keys(pages);
+        if (!keys.length) return null;
+        var pg = pages[keys[0]];           // first (and only) page
+        if (pg.missing !== undefined) return null;  // no such article
+        return {
+          img: pg.thumbnail ? pg.thumbnail.source : null,
+          page: pg.fullurl ||
+                ("https://en.wikipedia.org/wiki/" + encodeURIComponent(title))
+        };
+      })
       .catch(function () { return null; });
     return cache[title];
   }
@@ -42,8 +47,8 @@
     var thumb = cardEl.querySelector(".thumb");
     var linkWrap = cardEl.querySelector(".links");
     fetchWiki(title).then(function (data) {
-      var src = pickImage(data);
-      if (src && thumb) {
+      // image
+      if (data && data.img && thumb) {
         var img = new Image();
         img.alt = cardEl.getAttribute("data-species") || "";
         img.loading = "lazy";
@@ -55,15 +60,17 @@
           thumb.appendChild(img);
           requestAnimationFrame(function () { img.classList.add("in"); });
         };
-        img.onerror = function () { /* keep the leaf placeholder on failure */ };
-        img.src = src;
+        img.onerror = function () { /* keep leaf placeholder */ };
+        img.src = data.img;
       }
-      if (data && data.content_urls && data.content_urls.desktop && linkWrap) {
-        var page = data.content_urls.desktop.page;
+      // link
+      if (!linkWrap) return;
+      if (data && data.page) {
         linkWrap.innerHTML =
-          '<a href="' + page + '" target="_blank" rel="noopener">Wikipedia &#8599;</a>';
-      } else if (linkWrap) {
-        linkWrap.innerHTML = '<span class="muted" style="font-weight:600">No Wikipedia entry</span>';
+          '<a href="' + data.page + '" target="_blank" rel="noopener">Wikipedia &#8599;</a>';
+      } else {
+        linkWrap.innerHTML =
+          '<span class="muted" style="font-weight:600">No Wikipedia entry</span>';
       }
     });
   }
@@ -93,12 +100,10 @@
     return el;
   }
 
-  // lazy-hydrate cards as they scroll into view (avoids hammering the API)
   var hydObserver;
   function observeHydration() {
     if (hydObserver) hydObserver.disconnect();
     if (!("IntersectionObserver" in window)) {
-      // fallback: hydrate everything immediately
       document.querySelectorAll(".plant[data-wiki]").forEach(function (c) {
         if (!c.__hyd) { c.__hyd = true; hydrate(c); c.classList.add("in"); }
       });
@@ -135,7 +140,6 @@
     var famSel = document.getElementById("famSelect");
     var note = document.getElementById("catCount");
 
-    // family dropdown
     JMP.families.forEach(function (f) {
       var o = document.createElement("option");
       o.value = f[0];
