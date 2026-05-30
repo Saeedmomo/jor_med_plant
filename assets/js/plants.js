@@ -52,36 +52,37 @@
     return cache[title];
   }
 
-  function hydrate(cardEl) {
-    var title = cardEl.getAttribute("data-wiki");
-    var localImg = cardEl.getAttribute("data-img");
-    var linkWrap = cardEl.querySelector(".links");
-    var imageDone = false;
+function hydrate(cardEl) {
+  var title = cardEl.getAttribute("data-wiki");
+  var localImg = cardEl.getAttribute("data-img");
+  var linkWrap = cardEl.querySelector(".links");
 
-    // 1) try the bundled local image first
-    if (localImg) {
-      setImage(cardEl, localImg, function () { /* local missing -> wiki below */ tryWikiImage(); });
-    }
-
-    // 2) fetch Wikipedia for the link (always) and, if needed, the photo
-    function tryWikiImage() { imageDone = false; /* allow wiki image */ }
-    fetchWiki(title).then(function (data) {
-      // image fallback only if there is no local image declared
-      if (!localImg && data && data.thumbnail && data.thumbnail.source) {
-        setImage(cardEl, data.thumbnail.source, null);
-      }
-      // link
-      if (!linkWrap) return;
-      if (data && data.content_urls && data.content_urls.desktop) {
-        linkWrap.innerHTML =
-          '<a href="' + data.content_urls.desktop.page +
-          '" target="_blank" rel="noopener">Wikipedia &#8599;</a>';
-      } else {
-        linkWrap.innerHTML =
-          '<span class="muted" style="font-weight:600">No Wikipedia entry</span>';
-      }
+  if (localImg) {
+    setImage(cardEl, localImg, function () {
+      // If local image fails, Wikipedia fallback below can still work.
     });
   }
+
+  fetchWiki(title).then(function (data) {
+    var thumb = cardEl.querySelector(".thumb");
+    var hasImg = thumb && thumb.querySelector("img");
+
+    if (!hasImg && data && data.thumbnail && data.thumbnail.source) {
+      setImage(cardEl, data.thumbnail.source, null);
+    }
+
+    if (!linkWrap) return;
+
+    if (data && data.content_urls && data.content_urls.desktop) {
+      linkWrap.innerHTML =
+        '<a href="' + data.content_urls.desktop.page +
+        '" target="_blank" rel="noopener">Wikipedia &#8599;</a>';
+    } else {
+      linkWrap.innerHTML =
+        '<span class="muted" style="font-weight:600">No Wikipedia entry</span>';
+    }
+  });
+}
 
   function makeCard(p, opts) {
     opts = opts || {};
