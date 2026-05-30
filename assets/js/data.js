@@ -1760,6 +1760,7 @@ window.JMP = {
  "featured": [
   {
    "s": "Achillea fragrantissima",
+   "img": "assets/img/plants/achillea-fragrantissima.jpg",
    "f": "Asteraceae",
    "common": "Lavender cotton / Qaysoom",
    "wiki": "Achillea_fragrantissima",
@@ -1768,6 +1769,7 @@ window.JMP = {
   },
   {
    "s": "Peganum harmala",
+   "img": "assets/img/plants/peganum-harmala.jpg",
    "f": "Nitrariaceae",
    "common": "Syrian rue / Harmal",
    "wiki": "Peganum_harmala",
@@ -1776,6 +1778,7 @@ window.JMP = {
   },
   {
    "s": "Ceratonia siliqua",
+   "img": "assets/img/plants/ceratonia-siliqua.jpg",
    "f": "Fabaceae",
    "common": "Carob",
    "wiki": "Ceratonia_siliqua",
@@ -1784,6 +1787,7 @@ window.JMP = {
   },
   {
    "s": "Salvia fruticosa",
+   "img": "assets/img/plants/salvia-fruticosa.jpg",
    "f": "Lamiaceae",
    "common": "Greek / Three-lobed sage",
    "wiki": "Salvia_fruticosa",
@@ -1792,6 +1796,7 @@ window.JMP = {
   },
   {
    "s": "Origanum syriacum",
+   "img": "assets/img/plants/origanum-syriacum.jpg",
    "f": "Lamiaceae",
    "common": "Syrian oregano / Za'atar",
    "wiki": "Origanum_syriacum",
@@ -1800,6 +1805,7 @@ window.JMP = {
   },
   {
    "s": "Capparis spinosa",
+   "img": "assets/img/plants/capparis-spinosa.jpg",
    "f": "Capparaceae",
    "common": "Caper bush",
    "wiki": "Capparis_spinosa",
@@ -1808,6 +1814,7 @@ window.JMP = {
   },
   {
    "s": "Nigella sativa",
+   "img": "assets/img/plants/nigella-sativa.jpg",
    "f": "Ranunculaceae",
    "common": "Black seed / Habbat al-barakah",
    "wiki": "Nigella_sativa",
@@ -1816,6 +1823,7 @@ window.JMP = {
   },
   {
    "s": "Ruta chalepensis",
+   "img": "assets/img/plants/ruta-chalepensis.jpg",
    "f": "Rutaceae",
    "common": "Fringed rue / Faijan",
    "wiki": "Ruta_chalepensis",
@@ -1824,6 +1832,7 @@ window.JMP = {
   },
   {
    "s": "Matricaria aurea",
+   "img": "assets/img/plants/matricaria-aurea.jpg",
    "f": "Asteraceae",
    "common": "Golden chamomile / Babounej",
    "wiki": "Matricaria_chamomilla",
@@ -1832,6 +1841,7 @@ window.JMP = {
   },
   {
    "s": "Foeniculum vulgare",
+   "img": "assets/img/plants/foeniculum-vulgare.jpg",
    "f": "Apiaceae",
    "common": "Fennel / Shumar",
    "wiki": "Foeniculum_vulgare",
@@ -1840,6 +1850,7 @@ window.JMP = {
   },
   {
    "s": "Olea europaea",
+   "img": "assets/img/plants/olea-europaea.jpg",
    "f": "Oleaceae",
    "common": "Olive",
    "wiki": "Olea_europaea",
@@ -1848,6 +1859,7 @@ window.JMP = {
   },
   {
    "s": "Teucrium polium",
+   "img": "assets/img/plants/teucrium-polium.jpg",
    "f": "Lamiaceae",
    "common": "Felty germander / Ja'adeh",
    "wiki": "Teucrium_polium",
