@@ -15,6 +15,18 @@
     return species.replace(/ /g, "_");
   }
 
+  // Pick the best image URL from a REST summary payload and, when it is a
+  // standard MediaWiki thumbnail, bump the requested width so cards look sharp.
+  function pickImage(data) {
+    var src = null;
+    if (data && data.thumbnail && data.thumbnail.source) src = data.thumbnail.source;
+    else if (data && data.originalimage && data.originalimage.source) src = data.originalimage.source;
+    if (!src) return null;
+    // upscale the default ~240-320px thumb to 500px when the URL exposes a width
+    src = src.replace(/\/(\d+)px-/, "/500px-");
+    return src;
+  }
+
   var cache = {};
   function fetchWiki(title) {
     if (cache[title]) return cache[title];
@@ -30,19 +42,23 @@
     var thumb = cardEl.querySelector(".thumb");
     var linkWrap = cardEl.querySelector(".links");
     fetchWiki(title).then(function (data) {
-      if (data && data.thumbnail && data.thumbnail.source) {
+      var src = pickImage(data);
+      if (src && thumb) {
         var img = new Image();
-        img.alt = cardEl.getAttribute("data-species");
+        img.alt = cardEl.getAttribute("data-species") || "";
         img.loading = "lazy";
+        img.decoding = "async";
+        img.referrerPolicy = "no-referrer";
         img.className = "wikifade";
         img.onload = function () {
           thumb.innerHTML = "";
           thumb.appendChild(img);
           requestAnimationFrame(function () { img.classList.add("in"); });
         };
-        img.src = data.thumbnail.source;
+        img.onerror = function () { /* keep the leaf placeholder on failure */ };
+        img.src = src;
       }
-      if (data && data.content_urls && linkWrap) {
+      if (data && data.content_urls && data.content_urls.desktop && linkWrap) {
         var page = data.content_urls.desktop.page;
         linkWrap.innerHTML =
           '<a href="' + page + '" target="_blank" rel="noopener">Wikipedia &#8599;</a>';
@@ -81,6 +97,13 @@
   var hydObserver;
   function observeHydration() {
     if (hydObserver) hydObserver.disconnect();
+    if (!("IntersectionObserver" in window)) {
+      // fallback: hydrate everything immediately
+      document.querySelectorAll(".plant[data-wiki]").forEach(function (c) {
+        if (!c.__hyd) { c.__hyd = true; hydrate(c); c.classList.add("in"); }
+      });
+      return;
+    }
     hydObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
@@ -89,7 +112,7 @@
           hydObserver.unobserve(en.target);
         }
       });
-    }, { rootMargin: "200px" });
+    }, { rootMargin: "300px" });
     document.querySelectorAll(".plant[data-wiki]").forEach(function (c) {
       if (!c.__hyd) { c.__hyd = true; hydObserver.observe(c); }
     });
