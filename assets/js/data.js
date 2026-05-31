@@ -1896,7 +1896,7 @@ window.JMP = {
    "s": "Aaronsohnia factorovskyi",
    "f": "Asteraceae",
    "wiki": "Aaronsohnia",
-   "dist": "Jordan · Israel · regional endemic",
+   "dist": "Jordan · regional endemic",
    "status": "0 metabolites characterized",
    "note": "A regional endemic daisy. Asteraceae are rich in sesquiterpene lactones, yet this species remains chemically unexamined."
   },
