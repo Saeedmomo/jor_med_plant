@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jordan Medicinal Plants &mdash; A Cheminformatic &amp; Ethnobotanical Atlas of Secondary Metabolites, Traditional Uses &amp; Therapeutic Potential</title>
+<meta name="description" content="An open bilingual (Arabic/English) atlas of Jordan's medicinal flora: species with traditional uses, parts used and chemical constituents, integrated with a cheminformatic and network-pharmacology study of their secondary metabolites and predicted therapeutic targets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 460 560" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="mapFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3f7a55"/>
+          <stop offset="1" stop-color="#22432f"/>
+        </linearGradient>
+        <linearGradient id="palmFrond" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#4f7a5c"/>
+          <stop offset="1" stop-color="#2f6b4f"/>
+        </linearGradient>
+        <clipPath id="mapClip">
+          <path d="M150 178 L214 168 L276 150 L320 150 L356 140 L374 156 L352 196 L302 208 L356 246 L336 300 L316 362 L296 432 L262 452 L214 484 L206 486 L202 470 L210 424 L226 384 L206 356 L214 326 L196 300 L210 268 L190 240 L202 212 L178 192 Z"/>
+        </clipPath>
+      </defs>
+
+      <!-- soft sun disc -->
+      <circle cx="300" cy="150" r="128" fill="#c9a24b" opacity=".12"/>
+
+      <!-- faint botanical line-art (kept from original) -->
+      <g fill="none" stroke="#7c8b5a" stroke-width="1.4" opacity=".4">
+        <path d="M410 70c-40 30-58 82-52 150 4 46 22 82 60 100"/>
+        <path d="M410 70c26 22 38 62 34 116M410 106c12 30 14 66 8 108"/>
+      </g>
+
+      <!-- Jordan map silhouette -->
+      <path d="M150 178 L214 168 L276 150 L320 150 L356 140 L374 156 L352 196 L302 208 L356 246 L336 300 L316 362 L296 432 L262 452 L214 484 L206 486 L202 470 L210 424 L226 384 L206 356 L214 326 L196 300 L210 268 L190 240 L202 212 L178 192 Z"
+            fill="url(#mapFill)"/>
+      <!-- topographic contour texture inside the map -->
+      <g clip-path="url(#mapClip)" stroke="#c9a24b" stroke-width="1.1" fill="none" opacity=".28">
+        <path d="M150 300 C210 280 270 320 380 300"/>
+        <path d="M150 340 C210 320 280 360 380 340"/>
+        <path d="M160 260 C210 244 280 276 380 258"/>
+        <path d="M170 220 C220 208 280 236 370 220"/>
+        <path d="M170 390 C220 374 280 404 360 390"/>
+        <path d="M180 430 C220 418 270 442 340 430"/>
+      </g>
+      <!-- Dead Sea marker -->
+      <ellipse cx="206" cy="330" rx="8" ry="18" fill="#7fb7c9" opacity=".55"/>
+
+      <!-- date palm growing out of the map -->
+      <g>
+        <path d="M243 168 C246 128 249 96 250 66 L258 66 C258 98 256 130 255 168 Z" fill="#7a5a34"/>
+        <g stroke="#7a5a34" stroke-width="1" opacity=".5">
+          <path d="M245 150h9M245 132h9M246 114h8M247 96h7"/>
+        </g>
+        <g fill="url(#palmFrond)">
+          <path d="M254 66 C300 44 344 48 372 70 C338 60 300 66 262 82 Z"/>
+          <path d="M254 66 C300 50 340 66 360 104 C326 78 292 74 260 84 Z"/>
+          <path d="M254 66 C232 40 190 40 158 62 C196 56 230 64 258 82 Z"/>
+          <path d="M254 66 C214 48 178 66 158 102 C192 78 224 74 258 84 Z"/>
+          <path d="M254 62 C270 30 262 -2 248 -20 C246 16 244 44 252 76 Z"/>
+          <path d="M254 62 C284 34 322 22 356 26 C316 40 284 52 258 78 Z"/>
+          <path d="M254 62 C224 34 186 22 152 26 C192 40 224 52 250 78 Z"/>
+        </g>
+        <!-- dates -->
+        <g fill="#b5562e"><circle cx="262" cy="74" r="3.2"/><circle cx="270" cy="80" r="3"/><circle cx="246" cy="74" r="3.2"/><circle cx="238" cy="80" r="3"/></g>
+      </g>
+
+      <!-- medicinal herb sprigs emerging from the map's edge -->
+      <g stroke="#2f6b4f" stroke-width="2.4" fill="none" stroke-linecap="round">
+        <path d="M330 150 C346 120 344 96 330 78"/>
+        <path d="M150 176 C132 150 130 126 142 104"/>
+      </g>
+      <g fill="#4f7a5c">
+        <!-- right sprig leaves -->
+        <path d="M338 128 C352 122 362 126 366 136 C354 140 344 138 338 128 Z"/>
+        <path d="M334 108 C348 102 358 106 362 116 C350 120 340 118 334 108 Z"/>
+        <path d="M336 148 C322 142 314 146 310 156 C322 160 332 158 336 148 Z"/>
+        <!-- left sprig leaves -->
+        <path d="M138 132 C124 126 114 130 110 140 C122 144 132 142 138 132 Z"/>
+        <path d="M140 154 C154 148 164 152 168 162 C156 166 146 164 140 154 Z"/>
+      </g>
+      <!-- chamomile flower -->
+      <g transform="translate(330,74)">
+        <g fill="#f7f1e3" stroke="#e3d9c2" stroke-width=".6">
+          <ellipse cx="0" cy="-11" rx="3.4" ry="8"/><ellipse cx="0" cy="11" rx="3.4" ry="8"/>
+          <ellipse cx="-11" cy="0" rx="8" ry="3.4"/><ellipse cx="11" cy="0" rx="8" ry="3.4"/>
+          <ellipse cx="-8" cy="-8" rx="7" ry="3" transform="rotate(45)"/><ellipse cx="8" cy="8" rx="7" ry="3" transform="rotate(45)"/>
+          <ellipse cx="-8" cy="8" rx="3" ry="7" transform="rotate(45)"/><ellipse cx="8" cy="-8" rx="3" ry="7" transform="rotate(45)"/>
+        </g>
+        <circle r="6" fill="#c9a24b"/>
+      </g>
+
+      <!-- scattered seeds / molecules -->
+      <g fill="#c9a24b" opacity=".7"><circle cx="120" cy="240" r="3"/><circle cx="392" cy="330" r="3.4"/><circle cx="150" cy="470" r="2.6"/></g>
+      <g stroke="#b5562e" stroke-width="1.2" fill="none" opacity=".55">
+        <path d="M392 200l14 8-14 8"/><circle cx="392" cy="200" r="2.4" fill="#b5562e"/><circle cx="406" cy="208" r="2.4" fill="#b5562e"/><circle cx="392" cy="216" r="2.4" fill="#b5562e"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow reveal">Cheminformatic &amp; Ethnobotanical Atlas &middot; Open Access</p>
+    <h1 class="reveal">The chemistry &amp; healing heritage of <span style="color:var(--clay)">Jordan&rsquo;s</span> medicinal flora.</h1>
+    <p class="lead reveal">A computational atlas of <strong>7,866 secondary metabolites</strong> from <strong>475 Jordanian medicinal plants</strong> &mdash; paired with a bilingual (Arabic&nbsp;/&nbsp;English) ethnobotanical catalog of parts used, traditional uses and chemical constituents &mdash; mapping their chemical space, structural diversity and predicted therapeutic targets to accelerate natural-product drug discovery.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="index.html">Explore the plant catalog &rarr;</a>
+      <a class="btn btn-ghost" href="research.html">See the methods</a>
+    </div>
+    <div class="hero-badges reveal">
+      <span class="pill">RDKit</span>
+      <span class="pill">ChEMBL target prediction</span>
+      <span class="pill">Network pharmacology</span>
+      <span class="pill gold">Machine learning</span>
+      <span class="pill clay">Drug repurposing</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="section-tight">
+  <div class="wrap">
+    <div class="statline reveal" id="homeStats"></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT THE STUDY -->
+<section>
+  <div class="wrap" style="display:grid;grid-template-columns:1fr 1.15fr;gap:54px;align-items:start">
+    <div class="reveal">
+      <span class="kicker-rule"></span>
+      <h2>A research portal, not a webpage.</h2>
+      <p class="lead">Jordan hosts over 2,500 plant species at the crossroads of Asia, Africa and Europe &mdash; yet most of their chemistry has never been mapped computationally.</p>
+    </div>
+    <div class="reveal">
+      <p>This project compiles a curated phytochemical dataset through extensive literature mining and benchmarks it against the global natural-product collections <strong>COCONUT</strong> and <strong>LANaPDB</strong>, as well as <strong>FDA-approved drugs</strong>. Using RDKit we compute molecular descriptors, Bemis&ndash;Murcko scaffolds and a normalized spacial-score (nSPS) complexity metric, then visualise chemical space with PCA, t-SNE and UMAP.</p>
+      <p>Ligand-based target prediction against ChEMBL Actives, KEGG pathway enrichment, and a compound&ndash;target&ndash;pathway network built in Cytoscape reveal both established and <em>novel</em> polypharmacological associations &mdash; spanning glycoprotein processing, kinase regulation, immune modulation and protease inhibition.</p>
+      <p class="mb0"><a href="about.html">Read the full project background &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION CARDS -->
+<section class="section-tight">
+  <div class="wrap">
+    <div class="grid g3">
+      <a class="card reveal" href="index.html" style="text-decoration:none;color:inherit">
+        <span class="pill">Catalog</span>
+        <h3 style="margin:14px 0 8px">The Plant Catalog</h3>
+        <p class="muted mb0">Search 300+ species by their Arabic, common or Latin names &mdash; each with part used, region, traditional uses, chemical constituents, live botanical imagery and a full profile.</p>
+      </a>
+      <a class="card reveal" href="untapped.html" style="text-decoration:none;color:inherit">
+        <span class="pill clay">Frontier</span>
+        <h3 style="margin:14px 0 8px">Untapped Flora</h3>
+        <p class="muted mb0">Endemic species with little or no phytochemical characterization &mdash; open research opportunities.</p>
+      </a>
+      <a class="card reveal" href="discoveries.html" style="text-decoration:none;color:inherit">
+        <span class="pill gold">Findings</span>
+        <h3 style="margin:14px 0 8px">Compound Discoveries</h3>
+        <p class="muted mb0">Featured metabolites with predicted &mdash; and sometimes novel &mdash; therapeutic target associations.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PLANTS -->
+<section>
+  <div class="wrap">
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px">
+      <div>
+        <span class="kicker-rule"></span>
+        <h2 class="mb0">Signature medicinal species</h2>
+      </div>
+      <a class="btn btn-ghost" href="index.html">View all species &rarr;</a>
+    </div>
+    <div class="feat-grid" id="featuredHome"></div>
+    <p class="note" style="margin-top:22px">Images and one-line summaries are pulled live from Wikipedia / Wikimedia Commons and attributed to their source. Each species links to its full encyclopaedia entry.</p>
+  </div>
+</section>
+
+<!-- COLLABORATE CALLOUT -->
+<section class="section-tight">
+  <div class="wrap">
+    <div class="callout reveal" style="display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:center">
+      <div>
+        <h2 style="margin-top:0">Help build Jordan&rsquo;s national phytochemical map.</h2>
+        <p class="mb0">Researchers can contribute phytochemical profiles, LC-MS / GC-MS results and species characterizations &mdash; growing this into a living national database of Jordanian flora.</p>
+      </div>
+      <div style="text-align:right">
+        <a class="btn btn-clay" href="collaborate.html">Contribute data &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js?v=10"></script>
+<script src="assets/js/plants.js?v=10"></script>
+<script>
+  (function(){
+    var s = window.JMP.stats;
+    var items = [
+      [s.plants.toLocaleString(), "Medicinal plants"],
+      [s.phyto.toLocaleString(), "Secondary metabolites"],
+      [s.families, "Botanical families"],
+      [s.scaffolds.toLocaleString(), "Unique scaffolds"],
+      [s.targets.toLocaleString(), "Predicted protein targets"]
+    ];
+    document.getElementById("homeStats").innerHTML = items.map(function(i){
+      return '<div class="stat"><div class="num">'+i[0]+'</div><div class="lbl">'+i[1]+'</div></div>';
+    }).join("");
+    renderFeatured("featuredHome", 8);
+  })();
+</script>
+<script src="assets/js/components.js"></script>
+</body>
+</html>

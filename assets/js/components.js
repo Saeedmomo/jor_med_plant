@@ -5,11 +5,11 @@
 (function () {
   // ---- which links appear in the nav (order matters) ----
   var NAV = [
-    ["index.html", "Home"],
-    ["plants.html", "Plant Catalog"],
-    ["untapped.html", "Untapped Flora"],
+    ["index.html", "Plant Catalog"],
+    ["study.html", "The Study"],
     ["research.html", "Methods & AI"],
     ["discoveries.html", "Discoveries"],
+    ["untapped.html", "Untapped Flora"],
     ["about.html", "About"],
     ["collaborate.html", "Contribute", "cta"]
   ];
