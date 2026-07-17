@@ -27,9 +27,12 @@ jor_med_plant/                 ← put these files in your repository root
     ├── css/
     │   └── style.css           All site styling (one file — edit colours here)
     ├── js/
-    │   ├── data.js             ALL the data + curated content (edit this to update content)
+    │   ├── data.js             Cheminformatic data + curated featured/untapped/compounds
+    │   ├── plants_enriched.js  Bilingual ethnobotanical catalog (Arabic/English names,
+    │   │                       part used, region, traditional uses, chemical constituents)
     │   ├── components.js       Shared navigation bar + footer (edit nav here)
-    │   └── plants.js           Plant catalog logic + Wikipedia image fetching
+    │   └── plants.js           Catalog engine: rich cards, per-plant detail table (modal),
+    │                           table view, live Wikipedia photos, data-driven figures
     └── img/
         └── README.txt          Where to drop your manuscript figure images
 ```
@@ -103,6 +106,23 @@ Almost all content lives in **`assets/js/data.js`**. Open it in any text editor:
 - **Add an untapped species** → add to the `untapped` list.
 - **Add / edit a compound discovery** → edit the `compounds` list.
 - **Headline numbers** (475 plants, 7,866 metabolites, etc.) → edit `stats`.
+
+To **add or edit a catalogued species** (the searchable Arabic/English catalog on
+`plants.html`), edit **`assets/js/plants_enriched.js`** — a plain list of records:
+
+```js
+{ "s":"Salvia fruticosa", "f":"Lamiaceae", "ar":"ميرمية", "en":"Greek sage",
+  "part":"Leaves", "region":"Ajloun", "uses":"Sore throat, indigestion…",
+  "chem":"Rosmarinic acid, 1,8-cineole…", "ref":"…" }
+```
+
+Only `s` (Latin) and `f` (family) are required; every other field is optional and
+appears automatically in the card and the per-plant detail table when present. The
+family filter, the "at a glance" figures and the catalog counters all update from
+this file — no other edits needed.
+
+> The bilingual catalog was compiled from Jordanian ethnobotanical field surveys
+> and student documentation, cross-checked with the phytochemical literature.
 
 To **add a menu link** for the whole site, edit the `NAV` array at the top of
 `assets/js/components.js`.

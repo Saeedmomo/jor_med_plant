@@ -224,6 +224,11 @@ table.data td:first-child{font-weight:600;color:var(--green)}
 .figcap{font-family:var(--serif);font-size:.9rem;color:var(--ink-soft);margin-top:12px;font-style:italic}
 .fig-img-fallback{border:1px dashed var(--line-2);border-radius:10px;padding:30px;text-align:center;
   color:var(--ink-soft);font-size:.9rem;background:var(--parchment-2)}
+.figimg{width:100%;border-radius:8px;display:block;background:#fff;transition:.25s}
+.figimg:hover{opacity:.92}
+.fig-group{font-size:1.15rem;color:var(--clay);margin:36px 0 16px;padding-bottom:8px;
+  border-bottom:1px solid var(--line);letter-spacing:.01em}
+.fig-group:first-of-type{margin-top:8px}
 
 /* ---- callout ---- */
 .callout{background:linear-gradient(135deg,var(--green),#1b3526);color:#f3eedd;border-radius:var(--radius);
@@ -256,6 +261,89 @@ label.fld input:focus,label.fld textarea:focus,label.fld select:focus{outline:2p
 /* ---- reveal animation ---- */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
+
+/* =========================================================================
+   Enriched catalog — Arabic typography, rich cards, detail modal,
+   table view, toolbar controls, data-driven bar figures
+   ========================================================================= */
+:root{--arabic:"Noto Naskh Arabic","Amiri",var(--serif)}
+
+/* Arabic text */
+.ar{font-family:var(--arabic);font-size:1.18rem;font-weight:600;color:var(--clay);
+  line-height:1.5;direction:rtl}
+.ar.big{font-size:1.9rem;margin-bottom:2px}
+.ar-cell{font-family:var(--arabic);font-size:1.05rem;color:var(--clay-soft);direction:rtl;text-align:right}
+
+/* enriched plant card additions */
+.plant .common{font-family:var(--serif);font-size:.92rem;color:var(--green-3);font-style:italic}
+.plant .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+.pill.sm{font-size:.68rem;padding:3px 9px;font-weight:600}
+.plant-clickable{cursor:pointer;position:relative}
+.plant-clickable .card-tag{position:absolute;top:10px;right:10px;background:rgba(34,67,47,.85);
+  color:#f3eedd;font-size:.68rem;font-weight:700;letter-spacing:.03em;padding:3px 9px;border-radius:999px;
+  opacity:0;transform:translateY(-4px);transition:.2s}
+.plant-clickable:hover .card-tag{opacity:1;transform:none}
+.plant .thumb.lazy-thumb{background:linear-gradient(135deg,#e9e2cd,#dfe4cf);
+  background-size:cover;background-position:center;transition:background-image .4s}
+.plant .thumb.lazy-thumb.has-photo .ph{display:none}
+.plant .body .sci{font-size:1.02rem}
+.plant .ar{font-size:1.16rem;margin-bottom:1px}
+
+/* toolbar controls */
+.chk{display:inline-flex;align-items:center;gap:7px;font-size:.9rem;color:var(--ink-soft);
+  cursor:pointer;user-select:none;font-weight:600}
+.chk input{accent-color:var(--green);width:16px;height:16px}
+.viewtog{display:inline-flex;border:1px solid var(--line-2);border-radius:11px;overflow:hidden;background:var(--paper)}
+.viewtog button{border:0;background:transparent;font-family:var(--sans);font-weight:700;font-size:.86rem;
+  color:var(--ink-soft);padding:9px 14px;cursor:pointer;transition:.18s}
+.viewtog button.active{background:var(--green);color:#fff}
+
+/* catalog table view */
+.table-scroll{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
+table.catalog-table{border:0;border-radius:0;font-size:.9rem;min-width:900px}
+table.catalog-table td{vertical-align:top;max-width:280px}
+table.catalog-table .sci{font-style:italic;font-family:var(--display);white-space:nowrap}
+table.catalog-table tr.tr-click{cursor:pointer}
+table.catalog-table tbody tr:hover{background:rgba(201,162,75,.14)}
+
+/* key-value detail table */
+table.data.kv{margin-top:20px}
+table.data.kv th[scope=row]{background:var(--parchment-2);color:var(--green);width:190px;
+  text-align:left;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;vertical-align:top}
+table.data.kv td{font-family:var(--serif);font-size:1rem;color:var(--ink)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;display:none}
+.modal.open{display:block}
+.modal-backdrop{position:absolute;inset:0;background:rgba(28,24,17,.55);backdrop-filter:blur(3px)}
+.modal-card{position:relative;max-width:760px;margin:5vh auto;background:var(--paper);
+  border:1px solid var(--line-2);border-radius:18px;box-shadow:var(--shadow-lg);
+  max-height:90vh;overflow-y:auto;animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:12px;right:14px;z-index:3;background:rgba(255,253,247,.9);
+  border:1px solid var(--line);width:38px;height:38px;border-radius:50%;font-size:1.5rem;line-height:1;
+  color:var(--ink-soft);cursor:pointer;transition:.18s}
+.modal-close:hover{background:var(--clay);color:#fff;border-color:var(--clay)}
+.modal-body{padding:26px 30px 32px}
+.modal-hero{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.modal-fig{flex:0 0 180px;width:180px;height:180px;border-radius:14px;background:linear-gradient(135deg,#e9e2cd,#dfe4cf);
+  background-size:cover;background-position:center;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.modal-fig .ph svg{width:60px;height:60px;opacity:.5}
+.modal-fig.has-photo .ph{display:none}
+.modal-head{flex:1 1 220px}
+.modal-head .sci{font-family:var(--display);font-style:italic;color:var(--green);font-size:1.7rem}
+.modal-extract{font-family:var(--serif);font-size:1.02rem;line-height:1.7;margin-top:18px}
+.modal-links{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:560px){.modal-fig{flex-basis:120px;width:120px;height:120px}.modal-body{padding:22px 18px 26px}}
+
+/* data-driven bar figures */
+.barchart{display:flex;flex-direction:column;gap:10px}
+.bar-row{display:grid;grid-template-columns:150px 1fr 40px;align-items:center;gap:12px}
+.bar-lbl{font-size:.84rem;color:var(--ink);text-align:right;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{background:rgba(124,139,90,.14);border-radius:999px;height:16px;overflow:hidden}
+.bar-fill{display:block;height:100%;border-radius:999px;transition:width .8s ease}
+.bar-val{font-family:var(--mono);font-size:.8rem;color:var(--ink-soft);text-align:left}
+@media(max-width:560px){.bar-row{grid-template-columns:110px 1fr 32px;gap:8px}.bar-lbl{font-size:.76rem}}
 
 /* ---- misc ---- */
 .center{text-align:center}

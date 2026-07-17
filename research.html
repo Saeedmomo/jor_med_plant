@@ -93,28 +93,86 @@
 
 <hr class="divider">
 
-<!-- STATIC FIGURES -->
+<!-- MANUSCRIPT FIGURES -->
 <section>
   <div class="wrap">
     <span class="kicker-rule"></span>
     <h2 style="margin-bottom:8px">Manuscript figures</h2>
-    <p class="muted" style="margin-bottom:26px">High-resolution figures from the study. To display them, drop the image files into <code>assets/img/</code> using the filenames shown below.</p>
+    <p class="muted" style="margin-bottom:26px">High-resolution figures from the cheminformatic study of Jordan&rsquo;s phytochemical space. Click any figure to open it full size.</p>
+
+    <h3 class="fig-group">Chemical space &amp; drug-likeness</h3>
     <div class="grid g2">
       <figure class="figframe reveal" style="margin:0">
-        <img src="assets/img/fig1_physicochemical.png" alt="Physicochemical properties across datasets" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add &lt;b&gt;assets/img/fig1_physicochemical.png&lt;/b&gt;&lt;/div&gt;'">
-        <figcaption class="figcap">Figure 1 &middot; Physicochemical properties of Jordanian, COCONUT, LANaPDB and FDA compounds.</figcaption>
+        <a href="images/physicochemical_properties.png" target="_blank" rel="noopener"><img src="images/physicochemical_properties.png" alt="Physicochemical properties across datasets" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Physicochemical properties (MW, SlogP, TPSA, HBD, HBA, rotatable bonds) of Jordanian metabolites vs. COCONUT, LANaPDB and FDA drugs.</figcaption>
       </figure>
       <figure class="figframe reveal" style="margin:0">
-        <img src="assets/img/fig2_scaffold.png" alt="Scaffold diversity analysis" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add &lt;b&gt;assets/img/fig2_scaffold.png&lt;/b&gt;&lt;/div&gt;'">
-        <figcaption class="figcap">Figure 2 &middot; Scaffold diversity (CSR curves, scaffold counts, AUC, top scaffolds).</figcaption>
+        <a href="images/nSPS_KDE.png" target="_blank" rel="noopener"><img src="images/nSPS_KDE.png" alt="nSPS complexity distribution" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Distribution of molecular complexity (normalized spacial score, nSPS) across the four compound collections.</figcaption>
       </figure>
       <figure class="figframe reveal" style="margin:0">
-        <img src="assets/img/fig5_dimreduction.png" alt="PCA t-SNE UMAP chemical space" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add &lt;b&gt;assets/img/fig5_dimreduction.png&lt;/b&gt;&lt;/div&gt;'">
-        <figcaption class="figcap">Figure 5 &middot; Chemical space via PCA, t-SNE and UMAP.</figcaption>
+        <a href="images/dimentionality_reduction.png" target="_blank" rel="noopener"><img src="images/dimentionality_reduction.png" alt="Dimensionality reduction of chemical space" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Chemical-space embedding of the Jordanian library against reference natural-product and drug datasets.</figcaption>
       </figure>
       <figure class="figframe reveal" style="margin:0">
-        <img src="assets/img/fig7_network.png" alt="Compound target pathway network" style="width:100%;border-radius:8px" onerror="this.outerHTML='&lt;div class=\'fig-img-fallback\'&gt;Add &lt;b&gt;assets/img/fig7_network.png&lt;/b&gt;&lt;/div&gt;'">
-        <figcaption class="figcap">Figure 7 &middot; Compound&ndash;target&ndash;pathway network (Cytoscape).</figcaption>
+        <a href="images/umap_projection_tuned_final2.png" target="_blank" rel="noopener"><img src="images/umap_projection_tuned_final2.png" alt="UMAP projection" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">UMAP projection of ECFP4 fingerprints, revealing clusters and novel chemotypes among Jordanian phytochemicals.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/pca_plot.png" target="_blank" rel="noopener"><img src="images/pca_plot.png" alt="PCA plot" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Principal-component analysis (PCA) of the combined chemical space.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/tsne_plot.png" target="_blank" rel="noopener"><img src="images/tsne_plot.png" alt="t-SNE plot" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">t-SNE embedding highlighting local structural neighbourhoods.</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="fig-group">Structural scaffolds</h3>
+    <div class="grid g2">
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/scaffold_csr_plot.png" target="_blank" rel="noopener"><img src="images/scaffold_csr_plot.png" alt="Cyclic system retrieval curves" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Cyclic System Retrieval (CSR) curves &mdash; scaffold diversity and AUC per dataset.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/scaffold_counts_barplot.png" target="_blank" rel="noopener"><img src="images/scaffold_counts_barplot.png" alt="Scaffold counts" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Counts of unique Bemis&ndash;Murcko scaffolds recovered from each collection.</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="fig-group">Target prediction &amp; network pharmacology</h3>
+    <div class="grid g2">
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/top_targets_bar_chart.png" target="_blank" rel="noopener"><img src="images/top_targets_bar_chart.png" alt="Top predicted targets" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Top predicted protein targets ranked by number of phytochemical ligands.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/top_targets_heatmap_Jordan.png" target="_blank" rel="noopener"><img src="images/top_targets_heatmap_Jordan.png" alt="Target heatmap" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Heatmap of predicted compound&ndash;target associations for the Jordanian library.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/heatmap_compounds_targets.png" target="_blank" rel="noopener"><img src="images/heatmap_compounds_targets.png" alt="Compound target heatmap" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Top-20 compounds against their top-20 predicted targets.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/heatmap_compounds_21_40_vs_top20_targets.png" target="_blank" rel="noopener"><img src="images/heatmap_compounds_21_40_vs_top20_targets.png" alt="Compound target heatmap 21-40" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Compounds ranked 21&ndash;40 against the top-20 targets &mdash; extended polypharmacology.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/compound-gene-pathway.png" target="_blank" rel="noopener"><img src="images/compound-gene-pathway.png" alt="Compound gene pathway network" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Compound&ndash;target&ndash;pathway network (Cytoscape) integrating KEGG pathway enrichment.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/pareto_ligands_vs_proteins.png" target="_blank" rel="noopener"><img src="images/pareto_ligands_vs_proteins.png" alt="Pareto ligands vs proteins" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Pareto analysis of ligands versus protein targets, prioritising hub compounds.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/dendrogram.jpg" target="_blank" rel="noopener"><img src="images/dendrogram.jpg" alt="Hierarchical clustering dendrogram" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Hierarchical clustering dendrogram of compound&ndash;target similarity.</figcaption>
+      </figure>
+      <figure class="figframe reveal" style="margin:0">
+        <a href="images/Jordan_phyto.png" target="_blank" rel="noopener"><img src="images/Jordan_phyto.png" alt="Jordan phytochemical overview" class="figimg" loading="lazy" decoding="async"></a>
+        <figcaption class="figcap">Overview schematic of the Jordanian phytochemical dataset and workflow.</figcaption>
       </figure>
     </div>
   </div>

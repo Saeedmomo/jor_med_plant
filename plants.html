@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plant Catalog &mdash; Jordan Medicinal Plants</title>
-<meta name="description" content="Browse and search Jordanian medicinal plant species with live botanical imagery, families, and Wikipedia links.">
+<meta name="description" content="Browse and search Jordanian medicinal plants with Arabic and common names, parts used, traditional uses, chemical constituents, live botanical imagery and Wikipedia links.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -15,9 +15,10 @@
 
 <section class="section-tight" style="padding-top:54px">
   <div class="wrap">
-    <p class="eyebrow reveal">Living catalog</p>
-    <h1 class="reveal" style="max-width:18ch">The Jordan medicinal plant catalog</h1>
-    <p class="lead reveal narrow">Every species below is drawn from the curated literature dataset. Botanical photographs and a short description load live from Wikipedia, and each card links to its full encyclopaedia entry &mdash; cards with no entry mark species that are documented in the local literature but lack a public profile.</p>
+    <p class="eyebrow reveal">Living catalog &middot; النباتات الطبية الأردنية</p>
+    <h1 class="reveal" style="max-width:20ch">The Jordan medicinal plant catalog</h1>
+    <p class="lead reveal narrow">A comprehensive, searchable atlas of Jordan&rsquo;s medicinal flora &mdash; each species documented with its <strong>Arabic</strong>, common and Latin names, the part used, the region where it grows, traditional folk uses and main chemical constituents. Click any species for its full profile, live botanical photograph and encyclopaedia links.</p>
+    <div class="statline reveal" id="catStats" style="margin-top:26px"></div>
   </div>
 </section>
 
@@ -32,33 +33,82 @@
 
 <hr class="divider">
 
+<!-- FIGURES -->
+<section class="section-tight">
+  <div class="wrap">
+    <span class="kicker-rule"></span>
+    <h2 style="margin-bottom:6px">The flora at a glance</h2>
+    <p class="muted" style="margin-bottom:26px">Figures generated live from the catalog dataset.</p>
+    <div class="grid g2">
+      <div class="figframe reveal">
+        <h3 style="margin:0 0 4px">Best-represented botanical families</h3>
+        <p class="muted" style="font-size:.86rem;margin:0 0 16px">Number of documented medicinal species per family</p>
+        <div class="barchart" id="famFigure"></div>
+      </div>
+      <div class="figframe reveal">
+        <h3 style="margin:0 0 4px">Dominant chemical constituent classes</h3>
+        <p class="muted" style="font-size:.86rem;margin:0 0 16px">Species reporting each secondary-metabolite class</p>
+        <div class="barchart" id="chemFigure"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
 <!-- FULL BROWSER -->
 <section>
   <div class="wrap">
     <span class="kicker-rule"></span>
-    <h2 style="margin-bottom:6px">Browse all documented species</h2>
-    <p class="muted">Search by name or family, or filter by botanical family.</p>
+    <h2 style="margin-bottom:6px">Browse every documented species</h2>
+    <p class="muted">Search by Arabic, common or Latin name, family, use or constituent &mdash; or filter by botanical family.</p>
 
     <div class="toolbar">
       <div class="search">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c8b5a" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="plantSearch" type="text" placeholder="Search species or family (e.g. Salvia, Lamiaceae)&hellip;" autocomplete="off">
+        <input id="plantSearch" type="text" placeholder="Search &mdash; e.g. Salvia, ميرمية, sage, diabetes, thymol&hellip;" autocomplete="off">
       </div>
       <select class="select" id="famSelect"><option value="">All families</option></select>
+      <label class="chk"><input type="checkbox" id="docToggle"> Fully documented only</label>
+      <div class="viewtog">
+        <button data-view="grid" class="active">&#9638; Cards</button>
+        <button data-view="table">&#9776; Table</button>
+      </div>
       <span class="count-note" id="catCount"></span>
     </div>
 
     <div class="plant-grid" id="plantGrid"></div>
+    <p class="note" style="margin-top:22px">Botanical photographs and summaries load live from Wikipedia / Wikimedia Commons and are attributed to their source. Ethnobotanical data (Arabic names, parts, regions, uses) is compiled from Jordanian field surveys and student documentation; chemical constituents are curated from the phytochemical literature.</p>
   </div>
 </section>
 
 <div id="site-footer"></div>
 
-<script src="assets/js/data.js?v=10"></script>
-<script src="assets/js/plants.js?v=10"></script>
+<script src="assets/js/data.js?v=11"></script>
+<script src="assets/js/plants_enriched.js?v=11"></script>
+<script src="assets/js/plants.js?v=11"></script>
 <script>
-  renderFeatured("featuredCatalog");
-  initCatalog();
+  (function () {
+    var d = window.JMP_PLANTS || [];
+    var ar = d.filter(function (p) { return p.ar; }).length;
+    var uses = d.filter(function (p) { return p.uses; }).length;
+    var chem = d.filter(function (p) { return p.chem; }).length;
+    var fams = {}; d.forEach(function (p) { if (p.f) fams[p.f] = 1; });
+    var items = [
+      [d.length, "Catalogued species"],
+      [ar, "With Arabic names"],
+      [uses, "With documented uses"],
+      [chem, "With chemical profiles"],
+      [Object.keys(fams).length, "Botanical families"]
+    ];
+    var host = document.getElementById("catStats");
+    if (host) host.innerHTML = items.map(function (i) {
+      return '<div class="stat"><div class="num">' + i[0] + '</div><div class="lbl">' + i[1] + '</div></div>';
+    }).join("");
+    renderFeatured("featuredCatalog");
+    renderCatalogFigures();
+    initCatalog();
+  })();
 </script>
 <script src="assets/js/components.js"></script>
 </body>
