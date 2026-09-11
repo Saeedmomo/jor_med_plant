@@ -26,21 +26,28 @@
     return p === "" ? "index.html" : p;
   }
 
+  function buildSkipLink() {
+    return '<a class="skip-link" href="#main">Skip to main content</a>';
+  }
+
   function buildNav() {
     var cur = current();
     var links = NAV.map(function (l) {
       var cls = [];
       if (l[2] === "cta") cls.push("cta");
-      if (l[0] === cur) cls.push("active");
-      return '<a href="' + l[0] + '" class="' + cls.join(" ") + '">' + l[1] + "</a>";
+      var isCurrent = l[0] === cur;
+      if (isCurrent) cls.push("active");
+      return '<a href="' + l[0] + '" class="' + cls.join(" ") + '"' +
+        (isCurrent ? ' aria-current="page"' : "") + ">" + l[1] + "</a>";
     }).join("");
 
     return (
       '<header class="nav"><div class="nav-inner">' +
       '<a class="brand" href="index.html">' + LEAF +
       "<span>Jordan Medicinal Plants</span></a>" +
-      '<button class="nav-toggle" aria-label="Menu" id="navToggle">&#9776;</button>' +
-      '<nav class="nav-links" id="navLinks">' + links + "</nav>" +
+      '<button class="nav-toggle" aria-label="Menu" aria-haspopup="true" ' +
+      'aria-expanded="false" aria-controls="navLinks" id="navToggle">&#9776;</button>' +
+      '<nav class="nav-links" id="navLinks" aria-label="Primary">' + links + "</nav>" +
       "</div></header>"
     );
   }
@@ -73,6 +80,7 @@
   function mountChrome() {
     var navHost = document.getElementById("site-nav");
     var footHost = document.getElementById("site-footer");
+    if (navHost) navHost.insertAdjacentHTML("beforebegin", buildSkipLink());
     if (navHost) navHost.innerHTML = buildNav();
     if (footHost) footHost.innerHTML = buildFooter();
 
@@ -80,7 +88,8 @@
     var links = document.getElementById("navLinks");
     if (toggle && links) {
       toggle.addEventListener("click", function () {
-        links.classList.toggle("open");
+        var open = links.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
       });
     }
   }

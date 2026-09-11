@@ -14,9 +14,11 @@
   --green-2:#2f6b4f;
   --green-3:#4f7a5c;
   --sage:#7c8b5a;
-  --clay:#b5562e;
+  /* darkened from #b5562e to clear 4.5:1 text contrast on --parchment (was 4.3:1) */
+  --clay:#a04f27;
   --clay-soft:#c0703f;
   --gold:#c9a24b;
+  --gold-ink:#8a6c20;
   --line:#e3d9c2;
   --line-2:#d6c9aa;
   --shadow:0 1px 2px rgba(39,34,25,.05),0 8px 30px rgba(39,34,25,.07);
@@ -27,6 +29,14 @@
   --serif:"Spectral",Georgia,serif;
   --sans:"Hanken Grotesk",system-ui,sans-serif;
   --mono:"Spline Sans Mono",ui-monospace,monospace;
+
+  /* ---- data taxonomy: plant/taxon vs. compound vs. biological target ---- */
+  --taxon:var(--green);
+  --compound:var(--gold);
+  --compound-ink:var(--gold-ink);
+  --target:#4a3f7a;
+  --target-ink:#4a3f7a;
+  --navy:#1e3a5f;
 }
 
 *{box-sizing:border-box}
@@ -75,7 +85,7 @@ em.sci,.sci{font-style:italic}
 .nav-links a{font-family:var(--sans);font-size:.93rem;font-weight:600;color:var(--ink-soft);
   padding:7px 12px;border-radius:9px;text-decoration:none;transition:.18s}
 .nav-links a:hover{background:rgba(124,139,90,.16);color:var(--green);text-decoration:none}
-.nav-links a.active{color:var(--green);background:rgba(124,139,90,.2)}
+.nav-links a.active,.nav-links a[aria-current="page"]{color:var(--green);background:rgba(124,139,90,.2)}
 .nav-links a.cta{background:var(--green);color:#fff}
 .nav-links a.cta:hover{background:var(--green-2)}
 .nav-toggle{display:none;background:none;border:1px solid var(--line-2);border-radius:9px;
@@ -111,6 +121,7 @@ section{padding:72px 0}
   padding:26px;box-shadow:var(--shadow);transition:.22s}
 .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--line-2)}
 .grid{display:grid;gap:22px}
+.grid>*{min-width:0}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
@@ -129,8 +140,9 @@ section{padding:72px 0}
 .pill{display:inline-block;font-family:var(--sans);font-size:.74rem;font-weight:700;
   letter-spacing:.04em;padding:4px 11px;border-radius:999px;background:rgba(124,139,90,.18);
   color:var(--green);border:1px solid rgba(124,139,90,.3)}
-.pill.clay{background:rgba(181,86,46,.13);color:var(--clay);border-color:rgba(181,86,46,.3)}
-.pill.gold{background:rgba(201,162,75,.16);color:#8a6c20;border-color:rgba(201,162,75,.4)}
+.pill.clay{background:rgba(160,79,39,.13);color:var(--clay);border-color:rgba(160,79,39,.3)}
+.pill.gold{background:rgba(201,162,75,.16);color:var(--gold-ink);border-color:rgba(201,162,75,.4)}
+.pill.target{background:rgba(74,63,122,.13);color:var(--target);border-color:rgba(74,63,122,.32)}
 
 /* ---- hero (home) ---- */
 .hero{position:relative;overflow:hidden;padding:96px 0 70px;
@@ -241,7 +253,7 @@ table.data td:first-child{font-weight:600;color:var(--green)}
 
 /* ---- figure frames ---- */
 .figframe{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
-  padding:18px;box-shadow:var(--shadow)}
+  padding:18px;box-shadow:var(--shadow);min-width:0}
 .figframe canvas{max-width:100%}
 .figcap{font-family:var(--serif);font-size:.9rem;color:var(--ink-soft);margin-top:12px;font-style:italic}
 .fig-img-fallback{border:1px dashed var(--line-2);border-radius:10px;padding:30px;text-align:center;
@@ -262,11 +274,13 @@ table.data td:first-child{font-weight:600;color:var(--green)}
 
 /* ---- form ---- */
 .form-grid{display:grid;gap:16px;grid-template-columns:1fr 1fr}
+.form-grid>*{min-width:0}
 .form-grid .full{grid-column:1/-1}
 @media(max-width:620px){.form-grid{grid-template-columns:1fr}}
 label.fld{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:.9rem;color:var(--green)}
 label.fld input,label.fld textarea,label.fld select{font-family:var(--sans);font-size:1rem;
-  padding:11px 13px;border:1px solid var(--line-2);border-radius:10px;background:var(--paper);color:var(--ink)}
+  padding:11px 13px;border:1px solid var(--line-2);border-radius:10px;background:var(--paper);color:var(--ink);
+  width:100%;min-width:0;box-sizing:border-box}
 label.fld textarea{min-height:120px;resize:vertical}
 label.fld input:focus,label.fld textarea:focus,label.fld select:focus{outline:2px solid var(--sage);border-color:var(--sage)}
 
@@ -288,7 +302,7 @@ label.fld input:focus,label.fld textarea:focus,label.fld select:focus{outline:2p
    Enriched catalog — Arabic typography, rich cards, detail modal,
    table view, toolbar controls, data-driven bar figures
    ========================================================================= */
-:root{--arabic:"Noto Naskh Arabic","Amiri",var(--serif)}
+:root{--arabic:"Noto Naskh Arabic",var(--serif)}
 
 /* Arabic text */
 .ar{font-family:var(--arabic);font-size:1.18rem;font-weight:600;color:var(--clay);
@@ -318,7 +332,7 @@ label.fld input:focus,label.fld textarea:focus,label.fld select:focus{outline:2p
 .viewtog{display:inline-flex;border:1px solid var(--line-2);border-radius:11px;overflow:hidden;background:var(--paper)}
 .viewtog button{border:0;background:transparent;font-family:var(--sans);font-weight:700;font-size:.86rem;
   color:var(--ink-soft);padding:9px 14px;cursor:pointer;transition:.18s}
-.viewtog button.active{background:var(--green);color:#fff}
+.viewtog button.active,.viewtog button[aria-pressed="true"]{background:var(--green);color:#fff}
 
 /* catalog table view */
 .table-scroll{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -374,3 +388,58 @@ table.data.kv td{font-family:var(--serif);font-size:1rem;color:var(--ink)}
 .kicker-rule{display:inline-block;width:48px;height:3px;background:var(--clay);border-radius:2px;margin-bottom:18px}
 .note{background:var(--parchment-2);border:1px solid var(--line);border-left:4px solid var(--gold);
   border-radius:0 10px 10px 0;padding:14px 18px;font-size:.92rem;color:var(--ink-soft)}
+
+/* =========================================================================
+   Accessibility & interaction primitives
+   ========================================================================= */
+
+/* skip link */
+.skip-link{position:absolute;left:12px;top:-60px;z-index:200;background:var(--green);color:#fff;
+  padding:12px 18px;border-radius:0 0 10px 10px;font-family:var(--sans);font-weight:700;
+  font-size:.92rem;text-decoration:none;transition:top .18s}
+.skip-link:focus{top:0}
+
+/* visible, consistent keyboard focus across all interactive elements */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,
+textarea:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--target);outline-offset:2px;border-radius:4px}
+.btn:focus-visible{outline-offset:3px}
+
+/* visually-hidden but screen-reader-accessible labels */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* inline SVG icon system (replaces emoji glyphs) */
+.icon{width:1.4rem;height:1.4rem;stroke:currentColor;fill:none;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.icon-lg{width:1.9rem;height:1.9rem}
+.approach .a .ic .icon,.card .ic .icon{color:var(--green)}
+
+/* compound → target chips (data taxonomy) */
+.target-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.target-chips .pill{display:inline-flex;align-items:center;gap:5px}
+
+/* colour-taxonomy legend used on the catalog + discoveries pages */
+.legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:.82rem;color:var(--ink-soft)}
+.legend .dot{display:inline-flex;align-items:center;gap:6px}
+.legend .dot::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--sw,var(--green))}
+.legend .dot.taxon{--sw:var(--taxon)}
+.legend .dot.compound{--sw:var(--compound)}
+.legend .dot.target{--sw:var(--target)}
+
+/* two-column sections that set their fr-ratio inline via style= must still
+   collapse to one column on narrow screens — .grid.g2/g3/g4 already do this,
+   but the ad-hoc inline grids (hero copy blocks, callouts, forms) didn't */
+.split>*{min-width:0}
+@media(max-width:760px){
+  .split{grid-template-columns:1fr!important;gap:26px!important}
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .btn:hover{transform:none}
+  .card:hover,.plant:hover,.approach .a:hover{transform:none}
+  .modal-card{animation:none}
+  .bar-fill{transition:none}
+}

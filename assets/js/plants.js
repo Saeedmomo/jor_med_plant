@@ -74,7 +74,7 @@
       '<div class="fam">' + esc(p.f || "") + "</div>" +
       (p.common ? '<div class="common">' + esc(p.common) + "</div>" : "") +
       (p.uses ? '<div class="ex">' + esc(p.uses) + "</div>" : "") +
-      (p.chem ? '<div class="chips"><span class="pill">' + esc(p.chem.split(",")[0].trim()) + "</span></div>" : "") +
+      (p.chem ? '<div class="chips"><span class="pill gold">' + esc(p.chem.split(",")[0].trim()) + "</span></div>" : "") +
       '<div class="links"><a href="https://en.wikipedia.org/wiki/' +
       encodeURIComponent(title) + '" target="_blank" rel="noopener">Wikipedia &#8599;</a></div>' +
       "</div>";
@@ -103,9 +103,12 @@
     var chips = "";
     if (p.chem) {
       chips = '<div class="chips">' + p.chem.split(/[,;·]/).slice(0, 2).map(function (c) {
-        c = c.trim(); return c ? '<span class="pill sm">' + esc(c) + "</span>" : "";
+        c = c.trim(); return c ? '<span class="pill gold sm">' + esc(c) + "</span>" : "";
       }).join("") + "</div>";
     }
+    el.setAttribute("role", "button");
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("aria-label", "View full profile for " + p.s);
     el.innerHTML =
       thumb +
       '<div class="body">' +
@@ -116,7 +119,10 @@
       chips +
       "</div>" +
       '<div class="card-tag">Details &rarr;</div>';
-    el.addEventListener("click", function () { openDetail(p); });
+    el.addEventListener("click", function () { openDetail(p, el); });
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDetail(p, el); }
+    });
     if (thumbObserver) {
       var lz = el.querySelector(".lazy-thumb");
       if (lz) thumbObserver.observe(lz);
@@ -125,6 +131,8 @@
   }
 
   /* ---------- detail modal (a table + figure per plant) ---------- */
+  var modalLastFocus = null;
+
   function ensureModal() {
     var m = document.getElementById("plantModal");
     if (m) return m;
@@ -133,15 +141,34 @@
     m.className = "modal";
     m.innerHTML =
       '<div class="modal-backdrop"></div>' +
-      '<div class="modal-card" role="dialog" aria-modal="true">' +
-      '<button class="modal-close" aria-label="Close">&times;</button>' +
+      '<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">' +
+      '<button class="modal-close" aria-label="Close dialog">&times;</button>' +
       '<div class="modal-body"></div>' +
       "</div>";
     document.body.appendChild(m);
-    function close() { m.classList.remove("open"); document.body.style.overflow = ""; }
+    var card = m.querySelector(".modal-card");
+
+    function close() {
+      m.classList.remove("open");
+      document.body.style.overflow = "";
+      if (modalLastFocus && typeof modalLastFocus.focus === "function") modalLastFocus.focus();
+      modalLastFocus = null;
+    }
     m.querySelector(".modal-backdrop").addEventListener("click", close);
     m.querySelector(".modal-close").addEventListener("click", close);
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    document.addEventListener("keydown", function (e) {
+      if (!m.classList.contains("open")) return;
+      if (e.key === "Escape") { close(); return; }
+      if (e.key !== "Tab") return;
+      var focusable = card.querySelectorAll(
+        'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    m.close = close;
     return m;
   }
 
@@ -151,20 +178,21 @@
       (isAr ? ' dir="rtl" lang="ar" class="ar-cell"' : "") + ">" + esc(val) + "</td></tr>";
   }
 
-  function openDetail(p) {
+  function openDetail(p, trigger) {
     var m = ensureModal();
+    modalLastFocus = trigger || document.activeElement;
     var title = wikiTitle(p.s, p.wiki);
     var body = m.querySelector(".modal-body");
     var chemChips = p.chem ? '<div class="chips" style="margin-top:10px">' +
       p.chem.split(/[,;·]/).map(function (c) {
-        c = c.trim(); return c ? '<span class="pill sm">' + esc(c) + "</span>" : "";
+        c = c.trim(); return c ? '<span class="pill gold sm">' + esc(c) + "</span>" : "";
       }).join("") + "</div>" : "";
     body.innerHTML =
       '<div class="modal-hero">' +
       '<div class="modal-fig lazy-thumb" data-wiki="' + esc(title) + '">' + LEAF_PH + "</div>" +
       '<div class="modal-head">' +
       (p.ar ? '<div class="ar big" dir="rtl" lang="ar">' + esc(p.ar) + "</div>" : "") +
-      '<h2 class="sci" style="margin:.1em 0 .1em">' + esc(p.s) + "</h2>" +
+      '<h2 class="sci" id="modalTitle" style="margin:.1em 0 .1em">' + esc(p.s) + "</h2>" +
       '<div class="fam">' + esc(p.f || "") + (p.en ? " &middot; " + esc(p.en) : "") + "</div>" +
       chemChips +
       "</div></div>" +
@@ -184,7 +212,9 @@
       '<a class="btn btn-ghost" href="https://en.wikipedia.org/wiki/' + encodeURIComponent(title) +
       '" target="_blank" rel="noopener">Wikipedia &#8599;</a> ' +
       '<a class="btn btn-ghost" href="https://www.gbif.org/species/search?q=' +
-      encodeURIComponent(p.s) + '" target="_blank" rel="noopener">GBIF &#8599;</a></div>';
+      encodeURIComponent(p.s) + '" target="_blank" rel="noopener">GBIF &#8599;</a> ' +
+      '<a class="btn btn-ghost" href="https://powo.science.kew.org/results?q=' +
+      encodeURIComponent(p.s) + '" target="_blank" rel="noopener">Plants of the World Online &#8599;</a></div>';
 
     // fill figure + extract live
     var fig = body.querySelector(".modal-fig");
@@ -200,6 +230,8 @@
 
     m.classList.add("open");
     document.body.style.overflow = "hidden";
+    var card = m.querySelector(".modal-card");
+    if (card) card.focus();
   }
 
   /* ---------- full table view ---------- */
@@ -208,7 +240,7 @@
       "<th>Arabic</th><th>Latin name</th><th>Common</th><th>Family</th>" +
       "<th>Part</th><th>Traditional uses</th><th>Main constituents</th></tr></thead><tbody>";
     list.forEach(function (p) {
-      h += "<tr class='tr-click'>" +
+      h += '<tr class="tr-click" tabindex="0" role="button" aria-label="View full profile for ' + esc(p.s) + '">' +
         '<td dir="rtl" lang="ar" class="ar-cell">' + esc(p.ar || "—") + "</td>" +
         '<td class="sci">' + esc(p.s) + "</td>" +
         "<td>" + esc(p.en || "—") + "</td>" +
@@ -221,7 +253,10 @@
     host.innerHTML = h;
     var rows = host.querySelectorAll("tr.tr-click");
     rows.forEach(function (tr, i) {
-      tr.addEventListener("click", function () { openDetail(list[i]); });
+      tr.addEventListener("click", function () { openDetail(list[i], tr); });
+      tr.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDetail(list[i], tr); }
+      });
     });
   }
 
@@ -260,7 +295,11 @@
         var okD = !onlyDoc || (p.uses && p.chem);
         return okQ && okF && okD;
       });
-      if (mode === "table") { renderTable(grid, list); }
+      if (!list.length) {
+        grid.className = "plant-grid";
+        grid.innerHTML = '<p class="note" style="grid-column:1/-1">No species match that search. ' +
+          "Try a different name, family or constituent, or clear the filters.</p>";
+      } else if (mode === "table") { renderTable(grid, list); }
       else {
         grid.innerHTML = "";
         grid.className = "plant-grid";
@@ -269,12 +308,18 @@
       if (note) note.textContent = list.length + " species" + (fam ? " in " + fam : "");
     }
 
-    search.addEventListener("input", apply);
+    var searchTimer;
+    search.addEventListener("input", function () {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(apply, 150);
+    });
     famSel.addEventListener("change", apply);
     viewBtns.forEach(function (b) {
+      if (!b.hasAttribute("aria-pressed")) b.setAttribute("aria-pressed", b.classList.contains("active") ? "true" : "false");
       b.addEventListener("click", function () {
-        viewBtns.forEach(function (x) { x.classList.remove("active"); });
+        viewBtns.forEach(function (x) { x.classList.remove("active"); x.setAttribute("aria-pressed", "false"); });
         b.classList.add("active");
+        b.setAttribute("aria-pressed", "true");
         mode = b.getAttribute("data-view");
         grid.className = mode === "table" ? "" : "plant-grid";
         apply();
@@ -308,7 +353,7 @@
     });
     var clsTop = Object.keys(classes).map(function (k) { return [k, classes[k]]; })
       .sort(function (a, b) { return b[1] - a[1]; });
-    barFigure("chemFigure", clsTop, "var(--clay)");
+    barFigure("chemFigure", clsTop, "var(--gold)");
   };
 
   function barFigure(id, pairs, color) {
