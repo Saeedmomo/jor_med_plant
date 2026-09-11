@@ -1,4 +1,4 @@
-# Jordan Medicinal Plants — Website (Version 2)
+# Jordan Medicinal Plants — Website
 
 An open, modern research portal for the cheminformatic analysis of secondary
 metabolites in Jordanian medicinal plants. Built as **static files** so it runs
@@ -54,18 +54,17 @@ jor_med_plant/                 ← put these files in your repository root
 
 You don't need any web-development experience for this.
 
-### Option A — replace your existing repo contents (recommended)
+### Option A — upload through the GitHub website
 
 1. Go to your repository: **https://github.com/Saeedmomo/jor_med_plant**
-2. (Optional but safe) make a backup branch of your current site first:
-   on the repo page, click the branch dropdown → type `v1-backup` → **Create branch**.
-3. Upload the new files: click **Add file → Upload files**, then drag in
-   **everything inside this `site` folder** (the `.html` files, `.nojekyll`,
-   `README.md`, and the whole `assets/` folder). Keep the folder structure intact.
-4. Scroll down, write a commit message like `Deploy website v2`, click **Commit changes**.
-5. Turn on Pages: **Settings → Pages →** under *Build and deployment* set
+2. Click **Add file → Upload files**, then drag in **everything inside this
+   `site` folder** (the `.html` files, `.nojekyll`, `README.md`, and the
+   whole `assets/` folder). Keep the folder structure intact.
+3. Scroll down, write a commit message describing the change, click
+   **Commit changes**.
+4. Turn on Pages: **Settings → Pages →** under *Build and deployment* set
    **Source = Deploy from a branch**, **Branch = `main`** (or `master`), folder **`/ (root)`**, then **Save**.
-6. Wait ~1 minute. Your site is live at:
+5. Wait ~1 minute. Your site is live at:
    **https://saeedmomo.github.io/jor_med_plant/**
 
 ### Option B — using Git on your computer
@@ -75,7 +74,7 @@ git clone https://github.com/Saeedmomo/jor_med_plant.git
 cd jor_med_plant
 # copy all files from this 'site' folder into here, then:
 git add .
-git commit -m "Deploy website v2"
+git commit -m "Update site content"
 git push origin main
 ```
 

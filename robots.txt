@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saeedmomo.github.io/jor_med_plant/sitemap.xml
