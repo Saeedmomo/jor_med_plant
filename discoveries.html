@@ -16,40 +16,50 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body>
 <div id="site-nav"></div>
 <main id="main">
 
-<section class="section-tight" style="padding-top:54px">
+<section class="section-tight" style="padding-top:var(--sp-7)">
   <div class="wrap narrow">
-    <p class="eyebrow reveal">Findings</p>
-    <h1 class="reveal">Compound discoveries &amp; repurposing.</h1>
-    <p class="lead reveal">Ligand-based prediction across the Jordanian metabolite set surfaced compounds with rich &mdash; and sometimes entirely novel &mdash; therapeutic target associations. Each candidate below pairs an established source plant with a predicted mechanism and its experimental status.</p>
+    <div class="page-head reveal">
+      <p class="eyebrow">Findings</p>
+      <h1>Compound discoveries &amp; repurposing.</h1>
+      <p class="lead">Ligand-based prediction across the Jordanian metabolite set surfaced compounds with rich &mdash; and sometimes entirely novel &mdash; therapeutic target associations. Each candidate below pairs an established source plant with a predicted mechanism and its experimental status.</p>
+    </div>
   </div>
 </section>
 
+<div class="wrap toc-dock">
+  <nav class="toc" aria-label="On this page">
+    <a href="#compounds">Featured compounds</a>
+    <a href="#repurposing">Case study</a>
+    <a href="#network">Compound&ndash;target network</a>
+  </nav>
+</div>
+
 <!-- COMPOUND GRID -->
-<section class="section-tight" style="padding-top:0">
+<section id="compounds" class="section-tight" style="padding-top:0">
   <div class="wrap">
     <p class="legend" style="margin-bottom:18px">
       <span class="dot compound">Compound</span>
       <span class="dot target">Predicted biological target</span>
     </p>
     <div class="grid g3" id="compoundGrid"></div>
-    <p class="note" style="margin-top:24px">&starf; <strong>Highest polypharmacology.</strong> Predictions are computational hypotheses for prioritisation, not clinical claims; experimental validation is required.</p>
+    <p class="note" style="margin-top:var(--sp-5)">&starf; <strong>Highest polypharmacology.</strong> Predictions are computational hypotheses for prioritisation, not clinical claims; experimental validation is required.</p>
   </div>
 </section>
 
 <hr class="divider">
 
 <!-- REPURPOSING CASE STUDY -->
-<section>
+<section id="repurposing">
   <div class="wrap">
     <span class="kicker-rule"></span>
-    <h2 style="margin-bottom:8px">Case study: repurposing a &beta;-carboline</h2>
-    <p class="lead narrow" style="margin-bottom:30px">How network pharmacology took <em>Harmol</em> &mdash; an alkaloid from the desert plant <em>Peganum harmala</em> &mdash; from a known sedative chemistry to a candidate kinase modulator.</p>
+    <h2 style="margin-bottom:var(--sp-2)">Case study: repurposing a &beta;-carboline</h2>
+    <p class="lead narrow" style="margin-bottom:var(--sp-6)">How network pharmacology took <em>Harmol</em> &mdash; an alkaloid from the desert plant <em>Peganum harmala</em> &mdash; from a known sedative chemistry to a candidate kinase modulator.</p>
     <div class="steps">
       <div class="step reveal"><div class="n">A</div><div><h3>Start from the plant</h3><p><em>Peganum harmala</em> (Syrian rue / harmal) is widely used in Jordanian folk medicine and is rich in &beta;-carboline alkaloids, including harmol and harmine.</p></div></div>
       <div class="step reveal"><div class="n">B</div><div><h3>Fingerprint &amp; compare</h3><p>ECFP4 fingerprints of harmol were compared against ChEMBL Actives. The strongest matches pointed to the kinase <strong>DYRK1A</strong> &mdash; a well-validated harmine target (IC&#8325;&#8320; &asymp; 33&nbsp;nM).</p></div></div>
@@ -62,12 +72,12 @@
 <hr class="divider">
 
 <!-- NETWORK PHARMACOLOGY -->
-<section>
+<section id="network">
   <div class="wrap">
     <span class="kicker-rule"></span>
-    <h2 style="margin-bottom:8px">The compound&ndash;target&ndash;pathway network</h2>
-    <p class="narrow muted" style="margin-bottom:28px">Built in Cytoscape, the network integrates ligand-based predictions with KEGG pathway enrichment, revealing how single phytochemicals reach across many biological processes.</p>
-    <div class="statline reveal" id="netStats" style="margin-bottom:26px"></div>
+    <h2 style="margin-bottom:var(--sp-2)">The compound&ndash;target&ndash;pathway network</h2>
+    <p class="narrow muted" style="margin-bottom:var(--sp-6)">Built in Cytoscape, the network integrates ligand-based predictions with KEGG pathway enrichment, revealing how single phytochemicals reach across many biological processes.</p>
+    <div class="statline reveal" id="netStats" style="margin-bottom:var(--sp-5)"></div>
     <div class="grid g2">
       <div class="reveal">
         <p>The network exposes mechanisms spanning <strong>glycoprotein processing</strong> (castanospermine &rarr; mannosidases), <strong>kinase regulation</strong> (&beta;-carbolines &rarr; DYRK / HASPIN), <strong>immune modulation</strong> (microbial metabolites &rarr; KLRB1A / CD161) and <strong>protease inhibition</strong> (polyphenols &rarr; SUB1).</p>
@@ -128,6 +138,6 @@
   ].map(function(i){return '<div class="stat"><div class="num">'+i[0]+'</div><div class="lbl">'+i[1]+'</div></div>'}).join("");
 })();
 </script>
-<script src="assets/js/components.js?v=2"></script>
+<script src="assets/js/components.js?v=3"></script>
 </body>
 </html>

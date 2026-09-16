@@ -16,10 +16,22 @@
 
   var LEAF =
     '<svg class="mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<path d="M24 4C12 9 6 19 6 30c0 8 5 14 14 14 0-12 2-22 18-30C30 9 27 6 24 4Z" fill="#2f6b4f"/>' +
+    '<defs><linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="#376b4e"/><stop offset="1" stop-color="#143020"/>' +
+    "</linearGradient></defs>" +
+    '<path d="M24 4C12 9 6 19 6 30c0 8 5 14 14 14 0-12 2-22 18-30C30 9 27 6 24 4Z" fill="url(#leafGrad)"/>' +
     '<path d="M20 44C24 30 30 20 38 14" stroke="#c9a24b" stroke-width="2" stroke-linecap="round"/>' +
-    '<path d="M20 44c-1-9 1-18 8-26" stroke="#f7f1e3" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>' +
+    '<path d="M20 44c-1-9 1-18 8-26" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" opacity=".45"/>' +
     "</svg>";
+
+  var ICON_MENU =
+    '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" ' +
+    'stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
+    '<path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  var ICON_CLOSE =
+    '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" ' +
+    'stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
+    '<path d="M6 6l12 12M18 6L6 18"/></svg>';
 
   function current() {
     var p = location.pathname.split("/").pop();
@@ -45,8 +57,8 @@
       '<header class="nav"><div class="nav-inner">' +
       '<a class="brand" href="index.html">' + LEAF +
       "<span>Jordan Medicinal Plants</span></a>" +
-      '<button class="nav-toggle" aria-label="Menu" aria-haspopup="true" ' +
-      'aria-expanded="false" aria-controls="navLinks" id="navToggle">&#9776;</button>' +
+      '<button class="nav-toggle" type="button" aria-label="Open menu" ' +
+      'aria-expanded="false" aria-controls="navLinks" id="navToggle">' + ICON_MENU + "</button>" +
       '<nav class="nav-links" id="navLinks" aria-label="Primary">' + links + "</nav>" +
       "</div></header>"
     );
@@ -86,11 +98,44 @@
 
     var toggle = document.getElementById("navToggle");
     var links = document.getElementById("navLinks");
-    if (toggle && links) {
-      toggle.addEventListener("click", function () {
-        var open = links.classList.toggle("open");
-        toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      });
+    if (!toggle || !links) return;
+
+    function setOpen(open) {
+      links.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      toggle.innerHTML = open ? ICON_CLOSE : ICON_MENU;
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setOpen(!links.classList.contains("open"));
+    });
+
+    // choosing a destination closes the menu
+    links.addEventListener("click", function (e) {
+      if (e.target.closest("a")) setOpen(false);
+    });
+
+    // Escape returns focus to the control that opened the menu
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && links.classList.contains("open")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // a tap anywhere outside dismisses it
+    document.addEventListener("click", function (e) {
+      if (links.classList.contains("open") && !links.contains(e.target)) setOpen(false);
+    });
+
+    // returning to desktop width must clear the mobile-open state
+    if (window.matchMedia) {
+      var wide = window.matchMedia("(min-width: 941px)");
+      var onWide = function (m) { if (m.matches) setOpen(false); };
+      if (wide.addEventListener) wide.addEventListener("change", onWide);
+      else if (wide.addListener) wide.addListener(onWide);
     }
   }
 

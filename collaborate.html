@@ -16,17 +16,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body>
 <div id="site-nav"></div>
 <main id="main">
 
-<section class="section-tight" style="padding-top:54px">
+<section class="section-tight" style="padding-top:var(--sp-7)">
   <div class="wrap narrow">
-    <p class="eyebrow reveal">Collaboration portal</p>
-    <h1 class="reveal">Contribute to the open database.</h1>
-    <p class="lead reveal">This project is built to grow. If you study Jordanian flora, you can add data &mdash; and be credited &mdash; helping turn this resource into a living national phytochemical map.</p>
+    <div class="page-head reveal">
+      <p class="eyebrow">Collaboration portal</p>
+      <h1>Contribute to the open database.</h1>
+      <p class="lead">This project is built to grow. If you study Jordanian flora, you can add data &mdash; and be credited &mdash; helping turn this resource into a living national phytochemical map.</p>
+    </div>
   </div>
 </section>
 
@@ -34,9 +36,9 @@
 <section class="section-tight" style="padding-top:0">
   <div class="wrap">
     <div class="grid g3">
-      <div class="card reveal"><span class="pill">Chemistry</span><h3 style="margin:12px 0 6px">Phytochemical profiles</h3><p class="muted mb0">Isolated compounds, structures (SMILES / InChI) and the species they were found in.</p></div>
-      <div class="card reveal"><span class="pill">Spectra</span><h3 style="margin:12px 0 6px">LC-MS &amp; GC-MS results</h3><p class="muted mb0">Metabolite-profiling data for species that have never been analysed.</p></div>
-      <div class="card reveal"><span class="pill">Taxonomy</span><h3 style="margin:12px 0 6px">Characterization studies</h3><p class="muted mb0">New species records, traditional-use documentation and bioactivity assays.</p></div>
+      <div class="card reveal"><span class="pill">Chemistry</span><h2 style="margin:var(--sp-3) 0 6px">Phytochemical profiles</h2><p class="muted mb0">Isolated compounds, structures (SMILES / InChI) and the species they were found in.</p></div>
+      <div class="card reveal"><span class="pill">Spectra</span><h2 style="margin:var(--sp-3) 0 6px">LC-MS &amp; GC-MS results</h2><p class="muted mb0">Metabolite-profiling data for species that have never been analysed.</p></div>
+      <div class="card reveal"><span class="pill">Taxonomy</span><h2 style="margin:var(--sp-3) 0 6px">Characterization studies</h2><p class="muted mb0">New species records, traditional-use documentation and bioactivity assays.</p></div>
     </div>
   </div>
 </section>
@@ -45,16 +47,16 @@
 
 <!-- FORM -->
 <section>
-  <div class="wrap split" style="display:grid;grid-template-columns:1fr 1.2fr;gap:46px;align-items:start">
+  <div class="wrap split" style="display:grid;grid-template-columns:1fr 1.2fr;gap:var(--sp-7);align-items:start">
     <div class="reveal">
       <span class="kicker-rule"></span>
       <h2>Submit a contribution</h2>
       <p>Fill in what you have &mdash; even a single species or compound helps. On submit, your entry is packaged into a pre-filled email (or a public GitHub issue) for review before it joins the open dataset.</p>
       <p class="note">No account required. Nothing is published automatically; every submission is curated and attributed before inclusion.</p>
-      <h3 style="margin-top:24px">Other ways to contribute</h3>
-      <div class="fnav" style="display:flex;flex-direction:column;gap:8px">
-        <a href="https://github.com/Saeedmomo/jor_med_plant/issues/new" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px"><svg class="icon" style="width:1.1em;height:1.1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12h5M9.5 15.5h5"/></svg> Open a GitHub issue &#8599;</a>
-        <a href="https://github.com/Saeedmomo/jor_med_plant/fork" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px"><svg class="icon" style="width:1.1em;height:1.1em" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="6" r="2.2"/><circle cx="6" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6 8.2v1.8a4 4 0 0 0 4 4M18 8.2v1.8a4 4 0 0 1-4 4"/><path d="M12 14v2"/></svg> Fork the repository &amp; submit a pull request &#8599;</a>
+      <h3 style="margin-top:var(--sp-5)">Other ways to contribute</h3>
+      <div class="fnav" style="display:flex;flex-direction:column;gap:var(--sp-2)">
+        <a href="https://github.com/Saeedmomo/jor_med_plant/issues/new" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:var(--sp-2)"><svg class="icon" style="width:1.1em;height:1.1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12h5M9.5 15.5h5"/></svg> Open a GitHub issue &#8599;</a>
+        <a href="https://github.com/Saeedmomo/jor_med_plant/fork" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:var(--sp-2)"><svg class="icon" style="width:1.1em;height:1.1em" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="6" r="2.2"/><circle cx="6" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6 8.2v1.8a4 4 0 0 0 4 4M18 8.2v1.8a4 4 0 0 1-4 4"/><path d="M12 14v2"/></svg> Fork the repository &amp; submit a pull request &#8599;</a>
       </div>
     </div>
 
@@ -79,7 +81,7 @@
           <label class="fld full">Compounds / SMILES (optional)<textarea name="compounds" placeholder="One per line: Compound name, SMILES"></textarea></label>
           <label class="fld full">Notes, methods &amp; references<textarea name="notes" placeholder="Briefly describe the data, analytical method, and any DOI / citation."></textarea></label>
         </div>
-        <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
+        <div style="display:flex;gap:var(--sp-3);margin-top:18px;flex-wrap:wrap">
           <button type="submit" class="btn btn-primary">Package &amp; submit &rarr;</button>
           <button type="button" id="issueBtn" class="btn btn-ghost">Submit as GitHub issue</button>
         </div>
@@ -144,6 +146,6 @@
   });
 })();
 </script>
-<script src="assets/js/components.js?v=2"></script>
+<script src="assets/js/components.js?v=3"></script>
 </body>
 </html>

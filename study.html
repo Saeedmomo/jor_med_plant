@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body>
 <div id="site-nav"></div>
@@ -144,7 +144,7 @@
 
 <!-- ABOUT THE STUDY -->
 <section>
-  <div class="wrap split" style="display:grid;grid-template-columns:1fr 1.15fr;gap:54px;align-items:start">
+  <div class="wrap split" style="display:grid;grid-template-columns:1fr 1.15fr;gap:var(--sp-7);align-items:start">
     <div class="reveal">
       <span class="kicker-rule"></span>
       <h2>A research portal, not a webpage.</h2>
@@ -164,17 +164,17 @@
     <div class="grid g3">
       <a class="card reveal" href="index.html" style="text-decoration:none;color:inherit">
         <span class="pill">Catalog</span>
-        <h3 style="margin:14px 0 8px">The Plant Catalog</h3>
+        <h3 style="margin:14px 0 var(--sp-2)">The Plant Catalog</h3>
         <p class="muted mb0">Search 300+ species by their Arabic, common or Latin names &mdash; each with part used, region, traditional uses, chemical constituents, live botanical imagery and a full profile.</p>
       </a>
       <a class="card reveal" href="untapped.html" style="text-decoration:none;color:inherit">
         <span class="pill clay">Frontier</span>
-        <h3 style="margin:14px 0 8px">Untapped Flora</h3>
+        <h3 style="margin:14px 0 var(--sp-2)">Untapped Flora</h3>
         <p class="muted mb0">Endemic species with little or no phytochemical characterization &mdash; open research opportunities.</p>
       </a>
       <a class="card reveal" href="discoveries.html" style="text-decoration:none;color:inherit">
         <span class="pill gold">Findings</span>
-        <h3 style="margin:14px 0 8px">Compound Discoveries</h3>
+        <h3 style="margin:14px 0 var(--sp-2)">Compound Discoveries</h3>
         <p class="muted mb0">Featured metabolites with predicted &mdash; and sometimes novel &mdash; therapeutic target associations.</p>
       </a>
     </div>
@@ -184,7 +184,7 @@
 <!-- FEATURED PLANTS -->
 <section>
   <div class="wrap">
-    <div class="reveal" style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px">
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:var(--sp-6)">
       <div>
         <span class="kicker-rule"></span>
         <h2 class="mb0">Signature medicinal species</h2>
@@ -192,14 +192,14 @@
       <a class="btn btn-ghost" href="index.html">View all species &rarr;</a>
     </div>
     <div class="feat-grid" id="featuredHome"></div>
-    <p class="note" style="margin-top:22px">Images and one-line summaries are pulled live from Wikipedia / Wikimedia Commons and attributed to their source. Each species links to its full encyclopaedia entry.</p>
+    <p class="note" style="margin-top:var(--sp-5)">Images and one-line summaries are pulled live from Wikipedia / Wikimedia Commons and attributed to their source. Each species links to its full encyclopaedia entry.</p>
   </div>
 </section>
 
 <!-- COLLABORATE CALLOUT -->
 <section class="section-tight">
   <div class="wrap">
-    <div class="callout reveal split" style="display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:center">
+    <div class="callout reveal split" style="display:grid;grid-template-columns:1.4fr 1fr;gap:var(--sp-6);align-items:center">
       <div>
         <h2 style="margin-top:0">Help build Jordan&rsquo;s national phytochemical map.</h2>
         <p class="mb0">Researchers can contribute phytochemical profiles, LC-MS / GC-MS results and species characterizations &mdash; growing this into a living national database of Jordanian flora.</p>
@@ -232,6 +232,6 @@
     renderFeatured("featuredHome", 8);
   })();
 </script>
-<script src="assets/js/components.js?v=2"></script>
+<script src="assets/js/components.js?v=3"></script>
 </body>
 </html>

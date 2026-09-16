@@ -16,32 +16,43 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 <div id="site-nav"></div>
 <main id="main">
 
-<section class="section-tight" style="padding-top:54px">
+<section class="section-tight" style="padding-top:var(--sp-7)">
   <div class="wrap narrow">
-    <p class="eyebrow reveal">The scientific approach</p>
-    <h1 class="reveal">Methods &amp; AI.</h1>
-    <p class="lead reveal">A reproducible, in-silico pipeline turns a list of plant chemicals into testable biological hypotheses &mdash; characterizing chemical space, predicting protein targets, and prioritising candidates for the lab.</p>
+    <div class="page-head reveal">
+      <p class="eyebrow">The scientific approach</p>
+      <h1>Methods &amp; AI.</h1>
+      <p class="lead">A reproducible, in-silico pipeline turns a list of plant chemicals into testable biological hypotheses &mdash; characterizing chemical space, predicting protein targets, and prioritising candidates for the lab.</p>
+    </div>
   </div>
 </section>
 
+<div class="wrap toc-dock">
+  <nav class="toc" aria-label="On this page">
+    <a href="#approach">Approach</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#results">Results</a>
+    <a href="#figures">Figures</a>
+  </nav>
+</div>
+
 <!-- APPROACH CHIPS -->
-<section class="section-tight" style="padding-top:0">
+<section id="approach" class="section-tight" style="padding-top:0">
   <div class="wrap">
     <div class="approach">
-      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6M9.5 2v6l-4.8 8.2A2.5 2.5 0 0 0 6.9 20h10.2a2.5 2.5 0 0 0 2.2-3.8L14.5 8V2"/><path d="M8 14h8"/></svg></div><h3>Cheminformatics</h3><p>RDKit descriptors, Bemis&ndash;Murcko scaffolds and nSPS complexity to profile structure and drug-likeness.</p></div>
-      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="19" r="2.2"/><path d="M6.8 7.3 10.7 17M17.2 7.3 13.3 17M7.2 6h9.6"/></svg></div><h3>Network pharmacology</h3><p>Compound&ndash;target&ndash;pathway networks in Cytoscape to read systems-level mechanisms.</p></div>
-      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/></svg></div><h3>Molecular docking</h3><p>Structure-based scoring to test predicted ligand&ndash;target binding poses for prioritised pairs.</p></div>
-      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><h3>Virtual screening</h3><p>Fingerprint similarity against ChEMBL Actives to flag the most promising metabolites at scale.</p></div>
-      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2.4"/><circle cx="12" cy="12" r="2.4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></div><h3>Machine learning</h3><p>Similarity- and model-based inference linking phytochemicals to bioactivity classes.</p></div>
-      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11A8 8 0 0 0 6.3 6.3L4 8.6"/><path d="M4 4v4.6h4.6"/><path d="M4 13a8 8 0 0 0 13.7 4.7L20 15.4"/><path d="M20 20v-4.6h-4.6"/></svg></div><h3>Drug repurposing</h3><p>Mapping natural products onto validated targets to reveal new uses for known chemistry.</p></div>
-      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-7.5"/><path d="M12 13.5c0-4 3.2-6.2 7.5-6.2.3 4-2.8 6.2-7.5 6.2Z"/><path d="M12 13.5c0-3-2.3-5-6-5-.3 3 2.3 5 6 5Z"/></svg></div><h3>NP discovery</h3><p>Surfacing novel chemotypes and untapped species for experimental follow-up.</p></div>
+      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6M9.5 2v6l-4.8 8.2A2.5 2.5 0 0 0 6.9 20h10.2a2.5 2.5 0 0 0 2.2-3.8L14.5 8V2"/><path d="M8 14h8"/></svg></div><h2>Cheminformatics</h2><p>RDKit descriptors, Bemis&ndash;Murcko scaffolds and nSPS complexity to profile structure and drug-likeness.</p></div>
+      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="19" r="2.2"/><path d="M6.8 7.3 10.7 17M17.2 7.3 13.3 17M7.2 6h9.6"/></svg></div><h2>Network pharmacology</h2><p>Compound&ndash;target&ndash;pathway networks in Cytoscape to read systems-level mechanisms.</p></div>
+      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/></svg></div><h2>Molecular docking</h2><p>Structure-based scoring to test predicted ligand&ndash;target binding poses for prioritised pairs.</p></div>
+      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><h2>Virtual screening</h2><p>Fingerprint similarity against ChEMBL Actives to flag the most promising metabolites at scale.</p></div>
+      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2.4"/><circle cx="12" cy="12" r="2.4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></div><h2>Machine learning</h2><p>Similarity- and model-based inference linking phytochemicals to bioactivity classes.</p></div>
+      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11A8 8 0 0 0 6.3 6.3L4 8.6"/><path d="M4 4v4.6h4.6"/><path d="M4 13a8 8 0 0 0 13.7 4.7L20 15.4"/><path d="M20 20v-4.6h-4.6"/></svg></div><h2>Drug repurposing</h2><p>Mapping natural products onto validated targets to reveal new uses for known chemistry.</p></div>
+      <div class="a reveal"><div class="ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-7.5"/><path d="M12 13.5c0-4 3.2-6.2 7.5-6.2.3 4-2.8 6.2-7.5 6.2Z"/><path d="M12 13.5c0-3-2.3-5-6-5-.3 3 2.3 5 6 5Z"/></svg></div><h2>NP discovery</h2><p>Surfacing novel chemotypes and untapped species for experimental follow-up.</p></div>
     </div>
   </div>
 </section>
@@ -49,10 +60,10 @@
 <hr class="divider">
 
 <!-- PIPELINE -->
-<section>
+<section id="pipeline">
   <div class="wrap narrow">
     <span class="kicker-rule"></span>
-    <h2 style="margin-bottom:28px">The pipeline, step by step</h2>
+    <h2 style="margin-bottom:var(--sp-6)">The pipeline, step by step</h2>
     <div class="steps">
       <div class="step reveal"><div class="n">1</div><div><h3>Curate &amp; standardize</h3><p>Phytochemicals mined from Google&nbsp;Scholar, Scopus and PubMed are cleaned with RDKit &mdash; salt stripping, tautomer normalization and protonation correction &mdash; then deduplicated.</p></div></div>
       <div class="step reveal"><div class="n">2</div><div><h3>Compute descriptors</h3><p>Molecular weight, SlogP, TPSA, H-bond donors/acceptors and rotatable bonds, benchmarked against COCONUT, LANaPDB and FDA drugs.</p></div></div>
@@ -60,41 +71,41 @@
       <div class="step reveal"><div class="n">4</div><div><h3>Predict targets</h3><p>Tanimoto similarity to ChEMBL Actives (IC&#8325;&#8320; &lt; 1000&nbsp;nM, confidence &ge; 7) infers the most likely protein targets per compound.</p></div></div>
       <div class="step reveal"><div class="n">5</div><div><h3>Enrich pathways &amp; build the network</h3><p>Target genes are enriched against KEGG via Enrichr, and a compound&ndash;target&ndash;pathway network is assembled in Cytoscape for interpretation.</p></div></div>
     </div>
-    <p class="note" style="margin-top:24px">Tools: RDKit &middot; Cytoscape 3.10.3 &middot; Enrichr / KEGG 2021 &middot; ECFP4 fingerprints &middot; Tanimoto &ge; 0.6 &middot; ChEMBL (365,330 interactions, 3,363 targets).</p>
+    <p class="note" style="margin-top:var(--sp-5)">Tools: RDKit &middot; Cytoscape 3.10.3 &middot; Enrichr / KEGG 2021 &middot; ECFP4 fingerprints &middot; Tanimoto &ge; 0.6 &middot; ChEMBL (365,330 interactions, 3,363 targets).</p>
   </div>
 </section>
 
 <hr class="divider">
 
 <!-- LIVE CHARTS -->
-<section>
+<section id="results">
   <div class="wrap">
     <span class="kicker-rule"></span>
-    <h2 style="margin-bottom:8px">Results at a glance</h2>
-    <p class="muted" style="margin-bottom:30px">Charts below are rendered live from the project dataset.</p>
+    <h2 style="margin-bottom:var(--sp-2)">Results at a glance</h2>
+    <p class="muted" style="margin-bottom:var(--sp-6)">Charts below are rendered live from the project dataset.</p>
 
     <div class="grid g2">
       <div class="figframe reveal">
-        <h3 style="margin:0 0 4px">Top predicted protein targets</h3>
-        <p class="muted" style="font-size:.86rem;margin:0 0 12px">Ranked by number of phytochemical ligands</p>
+        <h3 style="margin:0 0 var(--sp-1)">Top predicted protein targets</h3>
+        <p class="muted" style="font-size:.86rem;margin:0 0 var(--sp-3)">Ranked by number of phytochemical ligands</p>
         <canvas id="targetChart" height="320"></canvas>
       </div>
       <div class="figframe reveal">
-        <h3 style="margin:0 0 4px">Most frequent scaffolds</h3>
-        <p class="muted" style="font-size:.86rem;margin:0 0 12px">Share of compounds (Bemis&ndash;Murcko)</p>
+        <h3 style="margin:0 0 var(--sp-1)">Most frequent scaffolds</h3>
+        <p class="muted" style="font-size:.86rem;margin:0 0 var(--sp-3)">Share of compounds (Bemis&ndash;Murcko)</p>
         <canvas id="scaffoldChart" height="320"></canvas>
       </div>
     </div>
 
-    <div class="grid g2" style="margin-top:22px">
+    <div class="grid g2" style="margin-top:var(--sp-5)">
       <div class="figframe reveal">
-        <h3 style="margin:0 0 4px">Molecular complexity (nSPS)</h3>
-        <p class="muted" style="font-size:.86rem;margin:0 0 12px">Mean normalized spacial score by dataset</p>
+        <h3 style="margin:0 0 var(--sp-1)">Molecular complexity (nSPS)</h3>
+        <p class="muted" style="font-size:.86rem;margin:0 0 var(--sp-3)">Mean normalized spacial score by dataset</p>
         <canvas id="nspsChart" height="300"></canvas>
       </div>
       <div class="figframe reveal">
         <h3 style="margin:0 0 14px">Physicochemical profile</h3>
-        <div style="overflow-x:auto"><table class="data" id="pchemTable"></table></div>
+        <div class="table-scroll"><table class="data" id="pchemTable"></table></div>
       </div>
     </div>
   </div>
@@ -103,11 +114,11 @@
 <hr class="divider">
 
 <!-- MANUSCRIPT FIGURES -->
-<section>
+<section id="figures">
   <div class="wrap">
     <span class="kicker-rule"></span>
-    <h2 style="margin-bottom:8px">Manuscript figures</h2>
-    <p class="muted" style="margin-bottom:26px">High-resolution figures from the cheminformatic study of Jordan&rsquo;s phytochemical space. Click any figure to open it full size.</p>
+    <h2 style="margin-bottom:var(--sp-2)">Manuscript figures</h2>
+    <p class="muted" style="margin-bottom:var(--sp-5)">High-resolution figures from the cheminformatic study of Jordan&rsquo;s phytochemical space. Click any figure to open it full size.</p>
 
     <h3 class="fig-group">Chemical space &amp; drug-likeness</h3>
     <div class="grid g2">
@@ -236,6 +247,6 @@
   tab.innerHTML=head+body;
 })();
 </script>
-<script src="assets/js/components.js?v=2"></script>
+<script src="assets/js/components.js?v=3"></script>
 </body>
 </html>

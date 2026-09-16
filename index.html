@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body>
 <div id="site-nav"></div>
@@ -25,28 +25,57 @@
 <!-- HERO -->
 <div class="hero hero-catalog">
   <div class="hero-deco" aria-hidden="true">
-    <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-      <g fill="none" stroke="#7c8b5a" stroke-width="1.4" opacity=".5">
-        <path d="M980 60c-60 40-90 110-90 200 0 70 30 120 90 150"/>
-        <path d="M980 60c40 30 60 90 60 170M980 110c20 40 24 90 18 150M980 160c-26 30-44 80-44 140"/>
-        <path d="M1080 40c-50 60-70 150-50 250"/>
-        <path d="M1080 40c30 40 36 110 24 180M1080 90c-18 50-22 120-8 190"/>
+    <svg viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+      <defs>
+        <linearGradient id="frond" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#5d8f70" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#376b4e" stop-opacity=".30"/>
+        </linearGradient>
+      </defs>
+      <!-- sage line-art sprigs, right -->
+      <g fill="none" stroke="#7c8b5a" stroke-width="1.4" opacity=".45">
+        <path d="M980 40c-60 46-92 118-92 212 0 74 32 126 92 156"/>
+        <path d="M980 40c42 32 62 94 62 178M980 94c22 42 26 94 20 158M980 148c-28 32-46 84-46 148"/>
+        <path d="M1096 20c-52 64-74 158-52 264"/>
+        <path d="M1096 20c32 42 38 116 26 190M1096 72c-20 52-24 126-8 200"/>
       </g>
-      <g fill="#c9a24b" opacity=".4">
-        <circle cx="890" cy="410" r="4"/><circle cx="936" cy="360" r="3"/><circle cx="1030" cy="290" r="3.5"/>
+      <!-- soft olive-leaf forms, mid-right -->
+      <g fill="url(#frond)">
+        <path d="M842 118c58-26 112-14 146 26-44-8-92 4-140 34Z"/>
+        <path d="M812 206c62-18 114 2 142 46-42-16-92-10-142 18Z"/>
+        <path d="M838 300c60-12 110 14 134 60-40-20-90-20-138 8Z"/>
+      </g>
+      <!-- chamomile disc florets / seed marks -->
+      <g fill="#c9a24b" opacity=".42">
+        <circle cx="880" cy="424" r="4"/><circle cx="930" cy="372" r="3"/>
+        <circle cx="1028" cy="296" r="3.5"/><circle cx="1104" cy="236" r="2.6"/>
+        <circle cx="792" cy="352" r="2.6"/>
+      </g>
+      <!-- faint sprigs, far left, to balance the field -->
+      <g fill="none" stroke="#7c8b5a" stroke-width="1.2" opacity=".22">
+        <path d="M74 470c-14-64-4-124 34-178"/>
+        <path d="M108 292c18 34 20 84 12 132M96 344c-20 26-30 70-32 122"/>
       </g>
     </svg>
   </div>
   <div class="wrap">
     <div class="hero-copy reveal">
-      <p class="eyebrow">النباتات الطبية في الأردن &middot; Living Atlas</p>
-      <h1>The medicinal plants of <span style="color:var(--clay)">Jordan</span>.</h1>
-      <p class="lead">A bilingual, searchable atlas of the Kingdom&rsquo;s healing flora &mdash; each species with its <strong>Arabic</strong> and Latin names, the part used, where it grows, its traditional uses and the chemistry behind them.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#browse">Browse the catalog &darr;</a>
-        <a class="btn btn-ghost" href="study.html">See the cheminformatic study</a>
+      <div class="hero-panel">
+        <p class="hero-ar" lang="ar" dir="rtl">النباتات الطبية في الأردن</p>
+        <p class="eyebrow">Living Atlas &middot; Arabic / English</p>
+        <h1>The medicinal plants of <span style="color:var(--clay)">Jordan</span>.</h1>
+        <p class="lead">A bilingual, searchable atlas of the Kingdom&rsquo;s healing flora &mdash; each species with its <strong>Arabic</strong> and Latin names, the part used, where it grows, its traditional uses and the chemistry behind them.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#browse">Browse the catalog &darr;</a>
+          <a class="btn btn-ghost" href="study.html">See the cheminformatic study</a>
+        </div>
+        <div class="hero-meta">
+          <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-5.1-7-10.4A7 7 0 0 1 19 10.6C19 15.9 12 21 12 21Z"/><circle cx="12" cy="10.4" r="2.6"/></svg>Hashemite Kingdom of Jordan</span>
+          <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19v15.5H6.5A2.5 2.5 0 0 0 4 22Z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H19"/></svg>Al-Ahliyya Amman University, Faculty of Pharmacy</span>
+          <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.6a3.4 3.4 0 1 0 0 4.8"/></svg>Open Access &middot; CC BY 4.0</span>
+        </div>
       </div>
-      <div class="statline" id="catStats" style="margin-top:30px"></div>
+      <div class="statline" id="catStats" style="margin-top:var(--sp-5)"></div>
     </div>
   </div>
 </div>
@@ -159,6 +188,6 @@
     initCatalog();
   })();
 </script>
-<script src="assets/js/components.js?v=2"></script>
+<script src="assets/js/components.js?v=3"></script>
 </body>
 </html>
