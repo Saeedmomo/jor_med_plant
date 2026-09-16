@@ -14,15 +14,7 @@
     ["collaborate.html", "Contribute", "cta"]
   ];
 
-  var LEAF =
-    '<svg class="mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<defs><linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">' +
-    '<stop offset="0" stop-color="#376b4e"/><stop offset="1" stop-color="#143020"/>' +
-    "</linearGradient></defs>" +
-    '<path d="M24 4C12 9 6 19 6 30c0 8 5 14 14 14 0-12 2-22 18-30C30 9 27 6 24 4Z" fill="url(#leafGrad)"/>' +
-    '<path d="M20 44C24 30 30 20 38 14" stroke="#c9a24b" stroke-width="2" stroke-linecap="round"/>' +
-    '<path d="M20 44c-1-9 1-18 8-26" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" opacity=".45"/>' +
-    "</svg>";
+  // (the leaf mark was removed from the header - the wordmark stands alone)
 
   var ICON_MENU =
     '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" ' +
@@ -55,7 +47,7 @@
 
     return (
       '<header class="nav"><div class="nav-inner">' +
-      '<a class="brand" href="index.html">' + LEAF +
+      '<a class="brand" href="index.html">' +
       "<span>Jordan Medicinal Plants</span></a>" +
       '<button class="nav-toggle" type="button" aria-label="Open menu" ' +
       'aria-expanded="false" aria-controls="navLinks" id="navToggle">' + ICON_MENU + "</button>" +
